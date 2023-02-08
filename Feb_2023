@@ -1,0 +1,18 @@
+**** 45. Jump Game II ****
+
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int posi=nums.size()-1,ans=0;
+        while(posi!=0){
+            for(int i=0;i<posi;i++){
+                if(i+nums[i]>=posi){
+                    ans++;
+                    posi=i;
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+};
