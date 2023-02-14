@@ -92,3 +92,31 @@ public:
         }
     }
 };
+
+************************************************************************************************
+**** Add Binary ( 14/2/23 ) ****
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        int i=a.size()-1;
+        int j=b.size()-1;
+        string ans="";
+        int rem=0;
+        while(i>=0 || j>=0 || rem){
+            if(i>=0){
+                rem+=a[i]-'0';
+                i--;
+            }
+            if(j>=0){
+                rem+=b[j]-'0';
+                j--;
+            }
+            ans+=(rem%2+'0');
+            rem=rem/2;
+        }
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+};
+
+**************************************************************************************
