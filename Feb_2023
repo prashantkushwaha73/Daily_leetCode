@@ -120,3 +120,30 @@ public:
 };
 
 **************************************************************************************
+**** 989. Add to Array-Form of Integer ( 15/2/23 ) ****
+class Solution {
+public:
+    vector<int> addToArrayForm(vector<int>& num, int k) {
+        vector<int> ans;
+        int it=num.size()-1,carry=0;
+        int sum=0;
+        while(it>=0 || k!=0 || carry!=0){
+            if(it>=0){
+                sum+=num[it];
+                it--;
+            }
+            if(k!=0){
+                sum+=(k%10);
+                k/=10;
+            }
+            sum+=carry;
+            ans.push_back(sum%10);
+            carry=sum/10;
+            sum=0;
+        }
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+};
+
+*********************************************************************************************************
