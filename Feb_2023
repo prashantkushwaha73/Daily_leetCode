@@ -147,3 +147,16 @@ public:
 };
 
 *********************************************************************************************************
+**** 104. Maximum Depth of Binary Tree ( 16/2/23 ) ****
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        if(root==NULL){
+            return 0;
+        }
+        return max(maxDepth(root->left),maxDepth(root->right))+1;
+    }
+};
+
+**********************************************************************************************************
+
