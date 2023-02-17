@@ -159,4 +159,30 @@ public:
 };
 
 **********************************************************************************************************
+**** 783. Minimum Distance Between BST Nodes ( 17/2/23 ) ****
+class Solution {
+private:
+    pair<int,int> solve(TreeNode* root,int& ans){
+        if(root==NULL){
+            return make_pair(1234567,-1234567);
+        }
+        pair<int,int> lefti=solve(root->left,ans);
+        pair<int,int> righti=solve(root->right,ans);
+        if((root->val-lefti.second)<ans){
+            ans=(root->val-lefti.second);
+        }
+        if((righti.first-root->val)<ans){
+            ans=(righti.first-root->val);
+        }
+        return make_pair(min(root->val,lefti.first),max(root->val,righti.second));
+    }
+public:
+    int minDiffInBST(TreeNode* root) {
+        int ans=INT_MAX;
+        pair<int,int> final=solve(root,ans);
+        return ans;
+    }
+};
+
+*************************************************************************************************************
 
