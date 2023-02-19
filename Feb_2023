@@ -201,3 +201,51 @@ public:
 };
 
 ***********************************************************************************************
+**** 103. Binary Tree Zigzag Level Order Traversal ( 19/2/23 ) ****
+
+class Solution {
+public:
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        vector<vector<int>> ans;
+        if(root==NULL){
+            return ans;
+        }
+        queue<TreeNode*> q;
+    	vector<int> store;
+    	q.push(root);
+    	q.push(NULL);
+    	bool flag=true;
+    	while(!q.empty()){
+    	    TreeNode* temp=q.front();
+    	    q.pop();
+    	    if(temp==NULL){
+    	        if(flag){
+    	            ans.push_back(store);
+    	            flag=!flag;
+    	            store.clear();
+    	        }
+    	        else{
+    	            reverse(store.begin(),store.end());
+                    ans.push_back(store);
+    	            flag=!flag;
+    	            store.clear();
+    	        }
+    	        if(!q.empty()){
+    	            q.push(NULL);
+    	        }
+    	    }
+    	    else{
+    	        store.push_back(temp->val);
+    	        if(temp->left){
+    	            q.push(temp->left);
+    	        }
+    	        if(temp->right){
+    	            q.push(temp->right);
+    	        }
+    	    }
+    	}
+    	return ans;
+    }
+};
+
+******************************************************************************************************************
