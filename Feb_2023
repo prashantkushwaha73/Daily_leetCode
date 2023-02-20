@@ -249,3 +249,36 @@ public:
 };
 
 ******************************************************************************************************************
+**** 35. Search Insert Position ( 20/2/23 ) ****
+
+class Solution {
+  private: int search(vector < int > & nums, int key, int s, int e, int & posi) {
+    if (s > e) {
+      return -1;
+    }
+    int mid = s + (e - s) / 2;
+    if (nums[mid] == key) {
+      return mid;
+    }
+    if (nums[mid] > key) {
+      posi = mid;
+      return search(nums, key, s, mid - 1, posi);
+    } else {
+      posi = mid + 1;
+      return search(nums, key, mid + 1, e, posi);
+    }
+  }
+  public: int searchInsert(vector < int > & nums, int target) {
+    int posi;
+    int s = 0, e = nums.size() - 1;
+    int p = search(nums, target, s, e, posi);
+    if (p != -1) {
+      return p;
+    } else {
+      return posi;
+    }
+  }
+
+};
+
+************************************************************************************************************
