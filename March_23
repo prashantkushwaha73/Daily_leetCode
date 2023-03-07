@@ -1,0 +1,31 @@
+********************************************************************
+**** Kth missing positive number ( 07/03/23 ) ****
+
+class Solution {
+public:
+    int findKthPositive(vector<int>& arr, int k) {
+        int v=1;
+        int i=0;
+        priority_queue<int> q;
+        while(q.size()<k)
+        {
+            if(i<arr.size()){
+            if(arr[i]==v)
+            {
+                v++;
+                i++;
+            }
+            else{
+                q.push(v);
+                v++;
+            }}
+            else{
+                q.push(v);
+                v++;
+            }
+        }
+        return q.top();
+    }
+};
+
+************************************************************************************
