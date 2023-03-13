@@ -62,3 +62,35 @@ public:
 };
 
 ***************************************************************************************
+**** 101. Symmetric Tree ( 13/3/23 ) ****
+
+class Solution {
+private:
+    void solve(TreeNode* first,TreeNode* second,bool& ans){
+        if((first==NULL&&second!=NULL) || (first!=NULL&&second==NULL)){
+            ans=false;
+            return;
+        }
+        if(first==NULL && second==NULL){
+            return;
+        }
+        if(first->val!=second->val){
+            ans=false;
+            return;
+        }
+        solve(first->right,second->left,ans);
+        solve(first->left,second->right,ans);
+        
+    }
+public:
+    bool isSymmetric(TreeNode* root) {
+        if(root->left==NULL && root->right==NULL){
+            return true;
+        }
+        bool ans=true;
+        solve(root->left,root->right,ans);
+        return ans;
+    }
+};  
+
+***********************************************************************************************
