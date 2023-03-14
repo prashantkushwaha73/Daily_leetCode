@@ -94,3 +94,28 @@ public:
 };  
 
 ***********************************************************************************************
+**** 129. Sum Root to Leaf Numbers ( 14/3/23 ) ****
+
+class Solution {
+private:
+    void solve(TreeNode* root,int& n,int& ans){
+        if(root==NULL){
+            return;
+        }
+         n=(n*10)+root->val; 
+        solve(root->left,n,ans);
+        solve(root->right,n,ans);
+        if(root->left==NULL && root->right==NULL){
+        ans+=n; }
+        n/=10;
+    }
+public:
+    int sumNumbers(TreeNode* root) {
+        int ans=0;
+        int n=0;
+        solve(root,n,ans);
+        return ans;
+    }
+};
+
+**********************************************************************************************
