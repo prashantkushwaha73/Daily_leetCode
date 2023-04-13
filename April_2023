@@ -1,0 +1,24 @@
+**** 946. Validate Stack Sequences ( 13/04/23 ) ****
+
+class Solution {
+public:
+    bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
+        int i=0,j=0;
+        stack<int> store;
+        while(i<pushed.size()){
+            store.push(pushed[i++]);
+            while( j<popped.size() && store.size()!=0 && (popped[j]==store.top())){
+                store.pop();
+                j++;
+            }
+        }
+        if(store.size()==0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+};
+
+**********************************************************************************************
