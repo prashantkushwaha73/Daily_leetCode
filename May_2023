@@ -18,3 +18,43 @@ public:
 };
 
 *************************************************************************
+**** 54. Spiral Matrix ****
+
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        vector<int> ans;
+        int m= matrix.size();
+        int n=matrix[0].size();
+        int sc=0,ec=n-1,sr=0,er=m-1,count=0;
+        while(count<=(m*n)-1){
+            for(int index=sc; index<=ec && count<=(m*n)-1 ;index++){
+                ans.push_back(matrix[sr][index]);
+                count++;
+            }
+            sr++;
+            
+            for(int index=sr;index<=er && count<=(m*n)-1;index++){
+                ans.push_back(matrix[index][ec]);
+                count++;
+            }
+            ec--;
+            
+            for(int index=ec;index>=sc && count<=(m*n)-1;index--){
+                ans.push_back(matrix[er][index]);
+                count++;
+            }
+            er--;
+            
+            for(int index=er;index>=sr && count<=(m*n)-1;index--){
+                ans.push_back(matrix[index][sc]);
+                count++;
+            }
+            sc++;
+            
+        }
+        return ans;
+    }
+};
+
+*************************************************************************************************
