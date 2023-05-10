@@ -18,7 +18,7 @@ public:
 };
 
 *************************************************************************
-**** 54. Spiral Matrix ****
+**** 54. Spiral Matrix ( 9/5/23 ) ****
 
 class Solution {
 public:
@@ -58,3 +58,50 @@ public:
 };
 
 *************************************************************************************************
+**** 59. Spiral Matrix II ( 10/5/23 ) ****
+
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> ans;
+        vector<int> store;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                store.push_back(0);
+            }
+            ans.push_back(store);
+            store.clear();
+        }
+        
+        int sc=0,ec=n-1,sr=0,er=n-1,count=1;
+        while(count<=(n*n)){
+            for(int index=sc; index<=ec && count<=(n*n) ;index++){
+                ans[sr][index]=count;
+                count++;
+            }
+            sr++;
+            
+            for(int index=sr;index<=er && count<=(n*n);index++){
+                ans[index][ec]=count;
+                count++;
+            }
+            ec--;
+            
+            for(int index=ec;index>=sc && count<=(n*n);index--){
+                ans[er][index]=count;
+                count++;
+            }
+            er--;
+            
+            for(int index=er;index>=sr && count<=(n*n);index--){
+                ans[index][sc]=count;
+                count++;
+            }
+            sc++;
+            
+        }
+        return ans;
+    }
+};
+
+***************************************************************************************************
