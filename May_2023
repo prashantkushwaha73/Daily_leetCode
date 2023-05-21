@@ -131,3 +131,120 @@ public:
 };
 
 **************************************************************************************************************
+**** 934. Shortest Bridge ( 21/05/23 ) ****
+
+class Solution {
+public:
+    int shortestBridge(vector<vector<int>>& grid) {
+        int rows=grid.size(),cols=grid[0].size();
+        map<pair<int,int>,bool> visited;
+        queue<pair<int,int>> q;
+         queue<pair<int,int>> store;
+        bool check=false;
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                if(grid[i][j]){
+                    visited[{i,j}]=true;
+                    q.push({i,j});
+                    store.push({i,j});
+                
+                    check=true;
+                    break;
+                }
+            }
+            if(check){
+                break;
+            }
+        }
+        pair<int,int> temp;
+        int x,y;
+        while(!store.empty()){
+            temp=store.front();
+            store.pop();
+            x=temp.first; y=temp.second;
+            if(x-1 >=0 && grid[x-1][y] && visited[{x-1,y}]==0){
+                store.push({x-1,y});
+                q.push({x-1,y});
+                visited[{x-1,y}]=true;
+            }
+            if(x+1 < rows && grid[x+1][y] && visited[{x+1,y}]==0){
+                store.push({x+1,y});
+                q.push({x+1,y});
+                visited[{x+1,y}]=true;
+            }
+            if(y-1 >=0 && grid[x][y-1] && visited[{x,y-1}]==0){
+                store.push({x,y-1});
+                q.push({x,y-1});
+                visited[{x,y-1}]=true;
+            }
+            if(y+1 < cols && grid[x][y+1] && visited[{x,y+1}]==0){
+                store.push({x,y+1});
+                q.push({x,y+1});
+                visited[{x,y+1}]=true;
+            }
+        }
+        q.push({-1,-1});
+        int ans=0;
+        while(!q.empty()){
+            temp=q.front();
+            q.pop();
+            if(temp.first==-1 && temp.second==-1){
+                ans++;
+                
+                if(!q.empty()){
+                    q.push({-1,-1});
+                }
+                else{
+                    return ans;
+                }
+            }
+            else{
+            x=temp.first; y=temp.second;
+                
+            if(x-1 >=0){
+                if(grid[x-1][y] && visited[{x-1,y}]==0){
+                    return ans;
+                }
+                if(grid[x-1][y]==0){
+                    grid[x-1][y]=1;
+                    q.push({x-1,y});
+                    visited[{x-1,y}]=true;
+                }
+            }
+            if(x+1 < rows){
+                if(grid[x+1][y] && visited[{x+1,y}]==0){
+                    return ans;
+                }
+                if(grid[x+1][y]==0){
+                    grid[x+1][y]=1;
+                    q.push({x+1,y});
+                    visited[{x+1,y}]=true;
+                }
+            }
+            if(y-1 >=0){
+                if(grid[x][y-1] && visited[{x,y-1}]==0){
+                    return ans;
+                }
+                if(grid[x][y-1]==0){
+                    grid[x][y-1]=1;
+                    q.push({x,y-1});
+                    visited[{x,y-1}]=true;
+                }
+            }
+            if(y+1 < cols){
+                if(grid[x][y+1] && visited[{x,y+1}]==0){
+                    return ans;
+                }
+                if(grid[x][y+1]==0){
+                    grid[x][y+1]=1;
+                    q.push({x,y+1});
+                    visited[{x,y+1}]=true;
+                }
+            }
+        }
+        }
+        return ans;
+    }
+};
+
+****************************************************************************************************************
