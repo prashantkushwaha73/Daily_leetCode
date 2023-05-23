@@ -277,3 +277,40 @@ public:
 };
 
 **********************************************************************************************************
+**** Kth Largest Element in a Stream ( 23/05/23 ) ****
+
+class KthLargest {
+public:
+    int n;
+    vector<int> v;
+    priority_queue<int,vector<int>,greater<int>> q;
+    KthLargest(int k, vector<int>& nums) {
+        n=k;
+        v=nums;
+        for(int i=0;i<v.size();i++){
+            if(q.size()<n){
+                q.push(v[i]);
+            }
+            else{
+                if(v[i]>=q.top()){
+                    q.pop();
+                    q.push(v[i]);
+                }
+            }
+        }
+    }
+    
+    int add(int val) {
+        if(q.size()<n){
+            q.push(val);
+        }
+        else{
+        if(val>q.top()){
+            q.pop();
+            q.push(val);
+        } }
+        return q.top();
+    }
+};
+
+**************************************************************************************************************
