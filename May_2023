@@ -314,3 +314,47 @@ public:
 };
 
 **************************************************************************************************************
+**** Design Parking System ( 29/05/23 ) ****
+
+class ParkingSystem {
+public:
+    int a,b,c;
+    ParkingSystem(int big, int medium, int small) {
+        a=big;
+        b=medium;
+        c=small;
+    }
+    
+    bool addCar(int carType) {
+        if( carType == 1 ){
+            if(a>0){
+                a--;
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        if( carType == 2 ){
+            if(b>0){
+                b--;
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        if( carType == 3 ){
+            if(c>0){
+                c--;
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+    } 
+};
+
+**************************************************************************************************************
