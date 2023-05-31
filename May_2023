@@ -381,3 +381,32 @@ public:
 };  
 
 ************************************************************************************************************
+**** 1396. Design Underground System ( 31/05/23 ) ****
+
+class UndergroundSystem {
+public:
+    map<string,vector<int>> m;
+    map<int,pair<int,string>> inn;
+    UndergroundSystem() {
+        
+    }
+    
+    void checkIn(int id, string stationName, int t) {
+        inn[id]={t,stationName};
+    }
+    
+    void checkOut(int id, string stationName, int t) {
+        m[inn[id].second+"to"+stationName].push_back(t-inn[id].first);
+    }
+    
+    double getAverageTime(string startStation, string endStation) {
+        vector<int> v = m[startStation+"to"+endStation];
+        double ans;
+        for(int i=0;i<v.size();i++){
+            ans+=v[i];
+        }
+        return ans/v.size();
+    }
+};
+
+***************************************************************************************************************
