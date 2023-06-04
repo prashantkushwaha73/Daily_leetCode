@@ -29,3 +29,32 @@ public:
 };
 
 *********************************************************************************************
+**** 547. Number of Provinces ( 04/06/23 ) ****
+
+class Solution {
+  private: void dfs(vector < vector < int >> & isConnected, vector < bool > & visited, int v, int n) {
+    visited[v] = true;
+    for (int i = 0; i < n; i++) {
+      if (isConnected[v][i]) {
+        if (visited[i]) {
+          continue;
+        }
+        dfs(isConnected, visited, i, n);
+      }
+    }
+  }
+  public: int findCircleNum(vector < vector < int >> & isConnected) {
+    int ans = 0, n = isConnected.size();
+    vector < bool > visited(n, false);
+    for (int i = 0; i < n; i++) {
+      if (visited[i]) {
+        continue;
+      }
+      ans++;
+      dfs(isConnected, visited, i, n);
+    }
+    return ans;
+  }
+};
+
+****************************************************************************************************
