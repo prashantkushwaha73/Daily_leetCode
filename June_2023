@@ -108,3 +108,55 @@ public:
 };
 
 ******************************************************************************************************************
+**** 1318. Minimum Flips to Make a OR b Equal to c ( 07/06/23 ) ****
+
+class Solution {
+public:
+    vector<int> decToBinary(int n)
+{
+    // array to store binary number
+    vector<int> v(32,0);
+ 
+    // counter for binary array
+    int i = 0;
+    while (n > 0) {
+ 
+        // storing remainder in binary array
+        v[i] = n % 2;
+        n = n / 2;
+        i++;
+    }
+ 
+    reverse(v.begin(),v.end());
+        return v;
+    
+}
+ 
+    
+    int minFlips(int a, int b, int c) {
+        vector<int> av = decToBinary(a);
+        vector<int> bv = decToBinary(b);
+        vector<int> cv = decToBinary(c);
+        int ans=0;
+        for(int i=0;i<32;i++){
+            if(av[i]==0 && bv[i]==0){
+                if(cv[i]==1){
+                    ans++;
+                }
+            }
+            else if(av[i]==1 && bv[i]==1){
+                if(cv[i]==0){
+                    ans++; ans++;
+                }
+            }
+            else{
+                if(cv[i]==0){
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+};
+
+************************************************************************************************************
