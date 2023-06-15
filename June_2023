@@ -197,3 +197,51 @@ public:
 };
 
 *******************************************************************************************************************
+**** 1161. Maximum Level Sum of a Binary Tree ( 15/06/23 ) ****
+
+class Solution {
+public:
+    int maxLevelSum(TreeNode* root) {
+        int ans=1,i=2,sum=0,maxi=root->val,count=0;
+        queue<TreeNode*> q;
+        q.push(root);
+        q.push(NULL);
+        TreeNode* temp;
+        while(!q.empty()){
+            temp = q.front();
+            q.pop();
+            if(temp==NULL){
+                count++;
+                if(sum > maxi){
+                    maxi = sum;
+                    ans=i;
+                    
+                }
+                i++;
+                sum=0;
+                if(!q.empty()){
+                    q.push(NULL);
+                }
+            }
+            else{
+                if(temp->left){
+                    q.push(temp->left);
+                    sum+=temp->left->val;
+                }
+                if(temp->right){
+                    q.push(temp->right);
+                    sum+=temp->right->val;
+                }
+            }
+            
+        }
+        if(ans > count){
+            return count;
+        }
+        else{
+            return ans;
+        }
+    }
+};
+
+*********************************************************************************************************
