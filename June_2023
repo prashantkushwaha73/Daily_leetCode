@@ -262,3 +262,41 @@ public:
 };
 
 *********************************************************************************************************
+**** 2090. K Radius Subarray Averages ( 20/06/23 ) ****
+
+class Solution {
+public:
+    vector<int> getAverages(vector<int>& nums, int k) {
+        vector<int> ans;
+        int a=0,b=0;
+        long long int sum=0;
+        if((2*k)+1 > nums.size()){
+            for(int i=0;i<nums.size();i++){
+                ans.push_back(-1);
+            }
+            return ans;
+        }
+       for(int i=0;i<=(2*k);i++){
+           sum+=nums[i];
+       }
+        b=2*k;
+    
+        for(int i=0;i<nums.size();i++){
+            if(i-k >=0 && i+k < nums.size()){
+                ans.push_back(sum/((2*k)+1));
+                sum-=nums[a];
+                a++;
+                if(b+1 < nums.size()){
+                    b++;
+                    sum+=nums[b];
+                }
+            }
+            else{
+                ans.push_back(-1);
+            }
+        }
+        return ans;
+    }
+};
+
+***********************************************************************************************************************
