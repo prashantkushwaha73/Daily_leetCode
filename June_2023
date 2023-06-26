@@ -313,3 +313,75 @@ int M = 1000000007;
         return ans%M;
 
 ***************************************************************************************************************
+**** 2462. Total Cost to Hire K Workers ( 26/06/23 ) ****
+
+class Solution {
+public:
+    class Compare{
+        public:
+        bool operator()(pair<int,pair<int,int>> a,pair<int,pair<int,int>> b){
+            if(b.first<a.first){
+                return true;
+            }
+            else if(b.first==a.first){
+                if(b.second.first < a.second.first){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            return false;
+        }
+    };
+    
+    long long totalCost(vector<int>& costs, int k, int candidates) {
+        
+        priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,Compare> pq;
+        
+        long long ans = 0;
+        if(2*candidates > costs.size()){
+            for(int i=0;i<costs.size();i++){
+                pq.push({costs[i],{i,-1}});
+            }
+            while(k){
+                ans += pq.top().first;
+                pq.pop();
+                k--;
+            }
+            return ans;
+        }
+        else{
+            int i = 0 , j = costs.size()-1,n;
+            for(i;i<candidates;i++){
+                pq.push({costs[i],{i,0}});
+            }
+            for(j;j>=costs.size()-candidates;j--){
+                 pq.push({costs[j],{j,1}});
+            }
+            while(k){
+                ans += pq.top().first;
+                n = pq.top().second.second;
+                pq.pop();
+                
+                if(n == 0){
+                    if(i<=j){
+                        pq.push({costs[i],{i,0}});
+                        i++;
+                    }
+                }
+                if(n == 1){
+                    if(i<=j){
+                        pq.push({costs[j],{j,1}});
+                        j--;
+                    }
+                }
+                k--;
+            }
+            return ans;
+        }
+        return ans;
+    }
+};
+
+********************************************************************************************************************
