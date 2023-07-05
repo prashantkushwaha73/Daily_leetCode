@@ -63,3 +63,34 @@ public:
 };
 
 ************************************************************************************************************
+**** 1493. Longest Subarray of 1's After Deleting One Element ( 06/07/23 ) ****
+
+class Solution {
+public:
+    int longestSubarray(vector<int>& nums) {
+        bool flag = false ;
+        int a = 0 , b = 0,posi,ans=0;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]==0 && flag==false){     
+                posi = i;
+                flag = true;
+                b++;
+            }
+            else if(nums[i]==0 && flag){
+               // cout<<a<<" "<<b << " "<<ans << endl;
+                ans = max(ans,b-a-1);
+                a = posi +1;
+                posi = i;
+               // flag = false ;
+                b++;
+            }
+            else{
+                b++;
+            }
+        }
+        ans = max(ans,b-a-1);
+        return ans;
+    }
+};
+
+**************************************************************************************************
