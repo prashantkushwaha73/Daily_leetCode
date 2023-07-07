@@ -139,3 +139,74 @@ public:
 };
 
 ********************************************************************************************************
+**** 2024. Maximize the Confusion of an Exam ( 07/07/23 ) ****
+
+class Solution {
+public:
+    int maxConsecutiveAnswers(string answerKey, int k) {
+        ////////////// for true ->
+        int i=0,j=0,anst=0,t;
+        if(answerKey[0]=='T'){
+            t=k;
+        }
+        else{
+            t=k-1;
+        }
+        
+        while(j+1<answerKey.size()){
+            if(answerKey[j+1]=='T'){
+                j++;
+            }
+            else{
+                if(t>0){
+                    j++;
+                    t--;
+                }
+                else{
+                    anst = max(anst,j-i+1);
+                    if(answerKey[i]=='T'){
+                        i++;
+                    }
+                    else{
+                        i++;
+                        t++;
+                    }
+                }
+            }
+        }
+        anst = max(anst,j-i+1);
+        // for false -> 
+        i=0;j=0;
+        if(answerKey[0]=='F'){
+            t=k;
+        }
+        else{
+            t=k-1;
+        }
+        while(j+1<answerKey.size()){
+            if(answerKey[j+1]=='F'){
+                j++;
+            }
+            else{
+                if(t>0){
+                    j++;
+                    t--;
+                }
+                else{
+                    anst = max(anst,j-i+1);
+                    if(answerKey[i]=='F'){
+                        i++;
+                    }
+                    else{
+                        i++;
+                        t++;
+                    }
+                }
+            }
+        }
+        anst = max(anst,j-i+1);
+        return anst;
+    }
+};
+
+***************************************************************************************************
