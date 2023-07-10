@@ -210,3 +210,33 @@ public:
 };
 
 ***************************************************************************************************
+**** 111. Minimum Depth of Binary Tree ( 10/07/23 ) ****
+
+class Solution {
+public:
+    void solve(TreeNode* root, int& ans, int n){
+        if(root->left==NULL && root->right==NULL){
+            if(n<ans){
+                ans=n;
+            }
+            return;
+        }
+        if(root->left){
+            solve(root->left,ans,n+1);
+        }
+        if(root->right){
+            solve(root->right,ans,n+1);
+        }
+        
+    }
+    int minDepth(TreeNode* root) {
+        int ans = INT_MAX,n;
+        if(root){
+            solve(root,ans,1);
+            return ans;
+        }
+        return 0;
+    }
+};
+
+*******************************************************************************************************
