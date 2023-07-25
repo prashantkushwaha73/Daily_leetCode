@@ -355,3 +355,29 @@ public:
 };
 
 ********************************************************************************************************
+**** 852. Peak Index in a Mountain Array ( 25/07/23 ) ****
+
+class Solution {
+public:
+    int peakIndexInMountainArray(vector<int>& arr) {
+        int n = arr.size();
+        int s=0 , e=n-1;
+        int mid = s+(e-s)/2;
+        while(s<=e){
+            if(arr[mid]>=arr[mid-1] && arr[mid]>=arr[mid+1]){
+                return mid;
+            }
+            if(arr[mid-1]>=arr[mid]){
+                e=mid;
+            }    
+            if(arr[mid+1]>=arr[mid]){
+                s=mid+1;
+            }
+            mid = s+(e-s)/2;
+        }
+        return s;
+    
+    }
+};
+
+********************************************************************************************************************
