@@ -1,0 +1,35 @@
+***********************************************************************************
+**** 77. Combinations ( 01/08/23 ) ****
+
+class Solution {
+public:
+    
+    void solve(vector<vector<int>>& ans,int index,vector<int>& v,int k,vector<int>& store){
+        store.push_back(v[index]);
+        if(store.size() == k){
+            ans.push_back(store);
+            store.pop_back();
+            return;
+        }
+        while(index+1 < v.size()){
+            index+=1;
+            solve(ans,index,v,k,store);
+        }
+        store.pop_back();
+    }
+    
+    vector<vector<int>> combine(int n, int k) {
+        vector<int> v;
+        for(int i=1;i<=n;i++){
+            v.push_back(i);
+            }
+        vector<vector<int>> ans;
+        vector<int> store;
+        for(int i=0;i<n;i++){
+        solve(ans,i,v,k,store);
+        }
+        return ans;
+    }
+};
+
+***********************************************************************************************************
