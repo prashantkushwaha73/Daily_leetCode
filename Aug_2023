@@ -110,3 +110,42 @@ public:
 };
 
 ******************************************************************************************************
+**** 81. Search in Rotated Sorted Array II ( 10/08/23 ) ****
+
+class Solution {
+public:
+   int search(vector<int>& v, int tar) {
+       vector<int> nums;
+       unordered_map<int,int> m;
+       for(int i=0;i<v.size();i++){
+           if(m[v[i]]==false){
+               m[v[i]]=true;
+               nums.push_back(v[i]);
+           }
+       }
+        int l=0;
+        int h=nums.size()-1;
+        int mid=0;
+        while(h-l>1){
+            mid=(l+h)/2;
+            if(nums[mid]==tar) return true;
+            if(nums[l]>nums[mid] && nums[mid]<nums[h]){
+                if(tar<=nums[h] && tar>nums[mid]) l=mid+1;
+                else h=mid-1;
+            }
+            else if(nums[mid]>nums[l] && nums[mid]>nums[h]){
+                if(tar>=nums[l] && tar<nums[mid]) h=mid-1;
+                else l=mid+1;
+            }
+            else{
+                if(tar>nums[mid]) l=mid+1;
+                else h=mid-1;
+            }
+        }
+        if(nums[l]==tar) return true;
+        if(nums[h]==tar) return true;
+        return false;
+    }
+};
+
+****************************************************************************************************
