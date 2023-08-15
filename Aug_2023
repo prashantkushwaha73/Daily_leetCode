@@ -169,3 +169,35 @@ public:
 };
 
 ****************************************************************************************
+**** 86. Partition List ( 15/08/23 ) ****
+
+class Solution {
+public:
+    ListNode* partition(ListNode* head, int x) {
+        vector<int> v;
+        ListNode* temp = head;
+        while(temp){
+            
+            if(temp->val < x)
+                v.push_back(temp->val);
+            
+            temp=temp->next;
+        }
+        temp = head;
+        while(temp){
+            
+            if(temp->val >= x)
+                v.push_back(temp->val);
+            
+            temp=temp->next;
+        }
+        temp = head;
+       for(int i=0;i<v.size();i++){
+           temp->val = v[i];
+           temp = temp->next;
+       }
+        return head;
+    }
+};
+
+***************************************************************************************************
