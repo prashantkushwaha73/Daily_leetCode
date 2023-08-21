@@ -238,3 +238,42 @@ public:
 };
 
 ***************************************************************************************
+**** 459. Repeated Substring Pattern ( 21/08/23 ) ****
+
+class Solution {
+public:
+    
+    bool solve(string str,string s){
+        if(s.size()%str.size()){
+            return false;
+        }
+        int i=0;
+        while(i<s.size()){
+            if(s.substr(i,str.size()) != str){
+                return false;
+            }
+            i+= str.size();
+        }
+        return true;
+    }
+    
+    bool repeatedSubstringPattern(string s) {
+        bool ans = false;
+        int i = 0, j = s.size()-1;
+        string s1="",s2="";
+        while(i<j){
+            s1+=s[i]; s2+=s[j];
+            reverse(s2.begin(),s2.end());
+            if(s1 == s2){
+                if(solve(s1, s.substr(i+1,s.size()-(2*s1.size()))  )){
+                    return true;
+                }
+            }
+            reverse(s2.begin(),s2.end());
+            i++; j--;
+        }
+        return false;
+    }
+};
+
+****************************************************************************************************
