@@ -277,3 +277,32 @@ public:
 };
 
 ****************************************************************************************************
+**** 168. Excel Sheet Column Title ( 22/08/23 ) ****
+
+class Solution {
+public:
+    string convertToTitle(int columnNumber) {
+        int n;
+        string ans="";
+        vector<char> alpha{'A','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+        while(columnNumber!=0){
+            if(columnNumber<=26){
+                ans = alpha[columnNumber] + ans;
+                return ans;
+            }
+            n = columnNumber%26;
+            if(n){
+                ans = alpha[n] + ans;
+                columnNumber /= 26;
+            }
+            else{
+                ans = alpha[26] + ans;
+                columnNumber /= 26;
+                columnNmber -= 1;
+            }
+        }
+        return ans;
+    }
+};
+
+*********************************************************************************************************
