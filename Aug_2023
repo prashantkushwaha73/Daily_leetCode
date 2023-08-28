@@ -340,3 +340,45 @@ public:
 };
 
 *****************************************************************************************
+**** 225. Implement Stack using Queues ( 28/08/23 ) ****
+
+lass MyStack {
+public:
+   queue<int> q;
+    MyStack() {
+        
+    }
+    
+    void push(int x) {
+        q.push(x);
+    }
+    
+    int pop() {
+        int v , size = q.size();
+        for(int i=1;i<size;i++){
+            q.push(q.front());
+            q.pop();
+        }
+        v = q.front();
+        q.pop();
+        return v;
+    }
+    
+    int top() {
+        int v , size = q.size();
+        for(int i=1;i<size;i++){
+            q.push(q.front());
+            q.pop();
+        }
+        v = q.front();
+        q.push(q.front());
+        q.pop();
+        return v;
+    }
+    
+    bool empty() {
+        return q.empty();
+    }
+};
+
+**************************************************************************************************
