@@ -382,3 +382,37 @@ public:
 };
 
 **************************************************************************************************
+**** 2483. Minimum Penalty for a Shop ( 29/08/23 ) ****
+
+class Solution {
+public:
+    int bestClosingTime(string str) {
+        int n = 0,y = 0,na = 0,ya = 0,ans,mini=INT_MAX;
+        for(int i=0;i<str.size();i++){
+            if(str[i] == 'N'){
+                n++;
+            }
+            else{
+                y++;
+            }
+        }
+        for(int i=0;i<str.size();i++){
+            if(na+(y-ya) < mini){
+                ans = i;
+                mini = na+(y-ya);
+            }
+            if(str[i] == 'Y'){
+                ya++;
+            }
+            else{
+                na++;
+            }
+        }
+        if(n < mini){
+            ans = str.size();
+        }
+        return ans;
+    }
+};
+
+****************************************************************************************
