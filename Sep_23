@@ -163,3 +163,42 @@ public:
 };
 
 ************************************************************************************
+**** 118. Pascal's Triangle ( 08/09/23 ) ****
+
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows) {
+       
+        int i=0;
+        vector<vector<int>> ans;
+         if(numRows==0){
+            return ans;
+        }
+        vector<int> fill;
+        for(int n=1;n<=numRows;n++){
+            if(n==1){
+                fill.push_back(1);
+                ans.push_back(fill);
+                fill.clear();
+            }
+            else if(n==2){
+                fill.push_back(1);
+                fill.push_back(1);
+                ans.push_back(fill);
+                fill.clear();
+            }
+            else{
+                fill.push_back(1);
+                for(int i=1;i<n-1;i++){
+                    fill.push_back(ans[n-2][i-1] + ans[n-2][i]);
+                }
+                fill.push_back(1);
+                ans.push_back(fill);
+                fill.clear();
+            }
+        }
+        return ans;
+    }
+};
+
+******************************************************************************************************
