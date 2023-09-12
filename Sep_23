@@ -266,3 +266,38 @@ public:
 };
 
 ***************************************************************************************************
+**** 1647. Minimum Deletions to Make Character Frequencies Unique ( 12/09/23 ) ****
+
+class Solution {
+public:
+    int minDeletions(string s) {
+        unordered_map<char,int> m1;
+        for(int i=0;i<s.size();i++){
+            m1[s[i]]++;
+        }
+        vector<int> v;
+        unordered_map<int,bool> m2;
+        for(auto i:m1){
+            if(m2[i.second]){
+                v.push_back(i.second);
+            }
+            else{
+                m2[i.second]=true;
+            }
+        }
+        int ans = 0;
+        for(int i=v.size()-1;i>=0;i--){
+            if(m2[v[i]]){
+                while(m2[v[i]] && v[i]>0){
+                    v[i]--;
+                    ans++;
+                }
+                if(v[i]>0){
+                m2[v[i]] = true;}
+            }
+        }
+        return ans;
+    }
+};
+
+*****************************************************************************************************************
