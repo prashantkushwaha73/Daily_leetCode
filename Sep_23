@@ -350,3 +350,120 @@ public:
 };
 
 *******************************************************************************************************
+**** 4. Median of Two Sorted Arrays ( 21/09/23 ) ****
+
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        double ans=0;
+        if(nums1.size()+nums2.size() == 1){
+            if(nums1.size()>0){
+             ans = nums1[0];
+                return ans;
+            }
+            else{
+                ans = nums2[0];
+                return ans;
+            }
+        }
+        
+        int count=0;
+        int n = ((nums1.size()+nums2.size())/2)-1,i=0,j=0;
+        while(i<nums1.size()&&j<nums2.size() && count<n) {
+            if(nums1[i]<nums2[j]){
+                count++;
+                i++;
+            }
+            else{
+                count++;
+                j++;
+            }
+        }
+        while(i<nums1.size()&& count<n){
+            count++;
+            i++;
+        }
+         while(j<nums2.size()&& count<n){
+            count++;
+            j++;
+        }
+       if((nums1.size()+nums2.size())%2){
+           if(i<nums1.size()&&j<nums2.size()){
+              if(nums1[i]<nums2[j]){
+                  i++;
+              }
+               else{
+                   j++;
+               }
+           }
+           else if(i<nums1.size()){
+               i++;
+           }
+           else{
+               j++;
+           }
+           
+           
+                      if(i<nums1.size()&&j<nums2.size()){
+              if(nums1[i]<nums2[j]){
+                  ans = nums1[i];
+                  return ans;
+              }
+               else{
+                   ans = nums2[j];
+                   return ans;
+               }
+           }
+           if(i<nums1.size()){
+               ans = nums1[i];
+               return ans;
+           }
+           else{
+               ans = nums2[j];
+               return ans;
+           }
+       }
+        else{
+                       if(i<nums1.size()&&j<nums2.size()){
+              if(nums1[i]<nums2[j]){
+                  ans += nums1[i];
+                  i++;
+              }
+               else{
+                   ans += nums2[j];
+        j++;
+               }
+           }
+           else if(i<nums1.size()){
+               ans += nums1[i];
+               i++;
+             
+           }
+           else{
+               ans += nums2[j];
+               j++;
+           }
+            
+                       if(i<nums1.size()&&j<nums2.size()){
+              if(nums1[i]<nums2[j]){
+                  ans += nums1[i];
+                  return ans/2;
+              }
+               else{
+                   ans += nums2[j];
+                   return ans/2;
+               }
+           }
+           if(i<nums1.size()){
+               ans += nums1[i];
+               return ans/2;
+           }
+           else{
+               ans += nums2[j];
+               return ans/2;
+           }
+        }
+    }
+};
+
+********************************************************************************************
