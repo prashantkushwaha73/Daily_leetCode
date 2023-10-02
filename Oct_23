@@ -37,3 +37,66 @@ void reverse(string& str)
 };
 
 *****************************************************************************************************
+**** 2038. Remove Colored Pieces if Both Neighbors are the Same Color ( 02/10/23 ) ****
+
+class Solution {
+public:
+   
+    bool solve(string& s,bool& turn,int& a,int& b,int& size){
+        if(turn){
+              if(a >= size-1){
+                  return !turn;
+              }
+        }
+        else{
+            if(b >= size-1){
+                return !turn;
+            }
+        }
+        
+        while(1){
+            if(turn){
+                if(s[a-1]=='A' && s[a]=='A' && s[a+1]=='A'){
+                    a+=1;
+                    if(turn){
+                        turn = false;
+                    }
+                    else{
+                        turn = true;
+                    }
+                    return solve(s,turn,a,b,size);
+                }
+                else{
+                  a+=1;
+                  
+                  return solve(s,turn,a,b,size);
+                }
+            }
+            else{
+               if(s[b-1]=='B' && s[b]=='B' && s[b+1]=='B'){
+                    b+=1;
+                    if(turn){
+                        turn = false;
+                    }
+                    else{
+                        turn = true;
+                    }
+                    return solve(s,turn,a,b,size);
+                }
+                else{
+                  b+=1;
+                  return solve(s,turn,a,b,size);
+                }
+            }
+        }
+        return !turn;
+    }
+
+    bool winnerOfGame(string colors) {
+        bool turn = true;
+        int a =1,b=1,size=colors.size();
+        return solve(colors,turn,a,b,size);
+    }
+};
+
+***********************************************************************************************************
