@@ -161,3 +161,70 @@ public:
 };
 
 **************************************************************************************************
+**** 34. Find First and Last Position of Element in Sorted Array ( 09/10/23 ) ****
+
+class Solution {
+    int first(vector<int>& nums,int v){
+        int s = 0,e = nums.size()-1;
+        int mid ;
+        while(s <= e){
+          mid = s+(e-s)/2;
+          if(nums[mid] == v){
+               if(s+1==e){
+                  return s;
+              }
+              e = mid;
+              if(s==e){
+                  return s;
+              }
+             
+          }
+          else if(nums[mid] > v){
+              e = mid-1;
+          }
+          else{
+              s = mid+1;
+          }
+        }
+        return -1;
+    }
+
+    int last(vector<int>& nums,int v){
+        int s = 0,e = nums.size()-1;
+        int mid ;
+        while(s <= e){
+          mid = s+(e-s)/2;
+          if(nums[mid] == v){
+              if(s+1 == e){
+                  if(nums[e]==v){
+                      return e;
+                  }
+                  else{
+                      return s;
+                  }
+              }
+              s = mid;
+              if(s==e){
+                  return e;
+              }
+        
+          }
+          else if(nums[mid] > v){
+              e = mid-1;
+          }
+          else{
+              s = mid+1;
+          }
+        }
+        return -1;
+    }
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int> ans;
+        ans.push_back(first(nums,target));
+        ans.push_back(last(nums,target));
+        return ans;
+    }
+};
+
+********************************************************************************************
