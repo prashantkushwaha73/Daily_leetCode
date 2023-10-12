@@ -228,3 +228,74 @@ public:
 };
 
 ********************************************************************************************
+****  1095. Find in Mountain Array ( 12/10/23 ) ****
+
+class Solution {
+  int peak(MountainArray& mountainArr){
+      int size = mountainArr.length();
+      int s = 0, e = size-1;
+      int mid;
+      while(s<e){
+          mid = s+(e-s)/2;
+          if(mountainArr.get(mid) < mountainArr.get(mid+1)){
+              s = mid+1;
+          }
+          else{
+              e = mid;
+          }
+      }
+      return s;
+  }
+  int left(int s,int e,int target,MountainArray& mountainArr){
+         int mid;
+         while(s<e){
+             mid = s+(e-s)/2;
+             if(mountainArr.get(mid) == target){
+                 return mid;
+             }
+             else if(mountainArr.get(mid)>target){
+                 e = mid-1;
+             }
+             else{
+                 s = mid+1;
+             }
+         }
+         if(mountainArr.get(s) == target){
+             return s;
+         }
+         return -1;
+  }
+
+  int right(int s,int e,int target,MountainArray& mountainArr){
+    int mid;
+         while(s<e){
+             mid = s+(e-s)/2;
+             if(mountainArr.get(mid) == target){
+                 return mid;
+             }
+             else if(mountainArr.get(mid)>target){
+                 s = mid+1;
+             }
+             else{
+                 e = mid-1;
+             }
+         }
+         if(mountainArr.get(s) == target){
+             return s;
+         }
+         return -1;
+  }
+public:
+    int findInMountainArray(int target, MountainArray &mountainArr) {
+        int p = peak(mountainArr);
+        if(left(0,p,target,mountainArr) != -1){
+            return left(0,p,target,mountainArr);
+        }
+        if(right(p+1,mountainArr.length()-1,target,mountainArr) != -1){
+            return right(p+1,mountainArr.length()-1,target,mountainArr);
+        }
+        return -1;
+    }
+};
+
+********************************************************************************************
