@@ -320,3 +320,36 @@ public:
 };
 
 *******************************************************************************************************
+**** 1269. Number of Ways to Stay in the Same Place After Some Steps ( 15/10/23 ) ****
+
+class Solution {
+public:
+    int solve(int count,int steps,int size,int posi,vector<vector<int>>& dp){
+        if(posi == 0 && count == steps){
+            return 1;
+        }
+        if(count==steps){
+            return 0;
+        }
+        if(dp[posi][count] != -1){
+            return dp[posi][count];
+        }
+        dp[posi][count] = 0;
+        if(count < steps && posi >0){
+            dp[posi][count] = dp[posi][count]%1000000007 + solve(count+1,steps,size,posi-1,dp)%1000000007;
+        }
+        if(count < steps && posi < size-1){
+            dp[posi][count] = dp[posi][count]%1000000007 + solve(count+1,steps,size,posi+1,dp)%1000000007;
+        }
+        if(count < steps){
+            dp[posi][count] = dp[posi][count]%1000000007 + solve(count+1,steps,size,posi,dp)%1000000007;
+        }
+        return dp[posi][count]%1000000007;
+    }
+    int numWays(int steps, int arrLen) {
+        vector<vector<int>> dp(600,vector<int> (steps+1,-1));
+        return solve(0,steps,arrLen,0,dp);
+    }
+};
+
+***************************************************************************************************************
