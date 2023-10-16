@@ -353,3 +353,26 @@ public:
 };
 
 ***************************************************************************************************************
+**** 119. Pascal's Triangle II ( 16/10/23 ) ****
+
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+        vector<int> v1;
+        vector<int> v2;
+        v1.push_back(1);
+        while(rowIndex){
+            rowIndex--;
+            v2.push_back(1);
+            for(int i=0;i<v1.size()-1;i++){
+                v2.push_back(v1[i]+v1[i+1]);
+            }
+            v2.push_back(1);
+            v1 = v2;
+            v2.clear();
+        }
+        return v1;
+    }
+};
+
+*******************************************************************************************************************
