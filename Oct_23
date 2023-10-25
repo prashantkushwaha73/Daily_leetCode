@@ -460,3 +460,48 @@ public:
 
 
 ****************************************************************************************************
+**** 779. K-th Symbol in Grammar ( 25/10/23 ) ****
+
+class Solution {
+public:
+    int kthGrammar(int n, int k) {
+        vector<int> v;
+        v.push_back(k);
+        while(n>1){
+            if(k%2){
+               k = (k+1)/2;
+               v.push_back(k);
+            }
+            else{
+                k = k/2;
+                v.push_back(k);
+            }
+            n--;
+        }
+        reverse(v.begin(),v.end());
+        int a = 0, b= 1,ans=0;
+        for(int i =1 ;i<v.size();i++){
+            if(v[i]%2){
+                ans = a;
+                if(ans == 0){
+                    a = 0; b = 1;
+                }
+                else{
+                    a = 1; b = 0;
+                }
+            }
+            else{
+                ans = b;
+                if(ans == 0){
+                    a = 0; b = 1;
+                }
+                else{
+                    a = 1; b = 0;
+                }
+            }
+        }
+        return ans;
+    }
+};
+
+**********************************************************************************
