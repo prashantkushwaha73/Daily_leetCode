@@ -505,3 +505,42 @@ public:
 };
 
 **********************************************************************************
+**** 823. Binary Trees With Factors ( 26/10/23 ) ****
+
+class Solution {
+public:
+   long long int mod = 1e9+7;
+    
+     long long int solve(unordered_map<int,int>& dp,unordered_map<int,bool>& dpc,unordered_map<int,int>& posi,unordered_map<int,bool>& check,vector<int>& arr,int value){
+         if(dpc[value]){
+             return dp[value];
+         }
+         long long int v = 0;
+         for(int i=0;i<posi[value];i++){
+             if( value%arr[i] == 0  && check[value/arr[i]]){
+                 v = v%mod + (solve(dp,dpc,posi,check,arr,arr[i])%mod * solve(dp,dpc,posi,check,arr,int(value/arr[i]))%mod);
+             }
+         }
+         dpc[value] = true;
+         return dp[value] = (1+v)%mod;
+     }
+  
+    int numFactoredBinaryTrees(vector<int>& arr) {
+        sort(arr.begin(),arr.end());
+        unordered_map<int,int> dp;
+        unordered_map<int,bool> dpc;
+        unordered_map<int,int> posi;
+        unordered_map<int,bool> check;
+        for(int i=0;i<arr.size();i++){
+            check[arr[i]] = true;
+            posi[arr[i]] = i;
+        }
+        long long int ans = 0;
+        for(int i=0;i<arr.size();i++){
+            ans = ans%mod + (solve(dp,dpc,posi,check,arr,arr[i])%mod);
+        }
+        return ans%mod;
+    }
+};
+
+*******************************************************************************************************
