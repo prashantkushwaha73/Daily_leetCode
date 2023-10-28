@@ -544,3 +544,75 @@ public:
 };
 
 *******************************************************************************************************
+**** 1220. Count Vowels Permutation ( 28/10/23 ) ****
+
+class Solution {
+public:
+
+   int mod = 1e9+7;
+
+     int solve(unordered_map<char,vector<int>>& dp,char v,int n){
+         if(n == 0){
+             return 1;
+         }
+         if(v == 'a'){
+             if(dp['a'][n] != -1){
+                 return dp['a'][n]%mod;
+             }
+             return dp['a'][n] = solve(dp,'e',n-1)%mod;
+         }
+         else if(v == 'e'){
+             if(dp['e'][n] != -1){
+                 return dp['e'][n]%mod;
+             }
+             int sum = 0;
+             sum = sum%mod + solve(dp,'a',n-1)%mod;
+             sum = sum%mod + solve(dp,'i',n-1)%mod;
+             return dp['e'][n] = sum%mod;
+         }
+         else if(v == 'i'){
+              if(dp['i'][n] != -1){
+                 return dp['i'][n]%mod;
+             }
+             int sum = 0;
+             sum = sum%mod + solve(dp,'a',n-1)%mod;
+             sum = sum%mod + solve(dp,'e',n-1)%mod;
+             sum = sum%mod + solve(dp,'o',n-1)%mod;
+             sum = sum%mod + solve(dp,'u',n-1)%mod;
+             return dp['i'][n] = sum%mod;
+         }
+         else if(v == 'o'){
+              if(dp['o'][n] != -1){
+                 return dp['o'][n]%mod;
+             }
+             int sum = 0;
+             sum = sum%mod + solve(dp,'i',n-1)%mod;
+             sum = sum%mod + solve(dp,'u',n-1)%mod;
+             return dp['o'][n] = sum%mod;
+         }
+         else{
+              if(dp['u'][n] != -1){
+                 return dp['u'][n]%mod;
+             }
+             return dp['u'][n] = solve(dp,'a',n-1)%mod;
+         }
+     }
+
+    int countVowelPermutation(int n) {
+        unordered_map<char,vector<int>> dp;
+        dp['a'] = vector<int> (n,-1);
+        dp['e'] = vector<int> (n,-1);
+        dp['i'] = vector<int> (n,-1);
+        dp['o'] = vector<int> (n,-1);
+        dp['u'] = vector<int> (n,-1);
+        int ans = 0;
+        ans = ans%mod + solve(dp,'a',n-1)%mod;
+        ans = ans%mod + solve(dp,'e',n-1)%mod;
+        ans = ans%mod + solve(dp,'i',n-1)%mod;
+        ans = ans%mod + solve(dp,'o',n-1)%mod;
+        ans = ans%mod + solve(dp,'u',n-1)%mod;
+        return ans%mod;
+    }
+};
+
+********************************************************************************************
