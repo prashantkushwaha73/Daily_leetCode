@@ -616,3 +616,33 @@ public:
 };
 
 ********************************************************************************************
+**** 1356. Sort Integers by The Number of 1 Bits ( 30/10/23 ) ****
+
+class Solution {
+public:
+  
+    int solve(int n){
+        int count= 0;
+        while(n){
+            if(n%2==1){
+                count++;
+            }
+            n/=2;
+        }
+        return count;
+    }
+
+    vector<int> sortByBits(vector<int>& arr) {
+        priority_queue<pair<int,int>> pq;
+        for(int i=0;i<arr.size();i++){
+            pq.push({solve(arr[i]),arr[i]});
+        }
+        for(int i=0;i<arr.size();i++){
+            arr[arr.size()-1-i] = pq.top().second;
+            pq.pop();
+        }
+         return arr;
+    }
+};
+
+*********************************************************************************************
