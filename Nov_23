@@ -1,0 +1,38 @@
+****************************************************************************************
+**** 501. Find Mode in Binary Search Tree ( 01/11/23 ) ****
+
+class Solution {
+public:
+   
+    void solve(TreeNode* root,unordered_map<int,int>& m){
+        if(root==NULL){
+            return;
+        }
+        m[root->val]++;
+        solve(root->left,m);
+        solve(root->right,m);
+    }
+
+    vector<int> findMode(TreeNode* root) {
+        unordered_map<int,int> m;
+        solve(root,m);
+        priority_queue<pair<int,int>> pq;
+        for(auto i:m){
+            pq.push({i.second,i.first});
+        }
+        int p = pq.top().first;
+        vector<int> ans;
+        while(!pq.empty()){
+            if(pq.top().first == p){
+                ans.push_back(pq.top().second);
+                pq.pop();
+            }
+            else{
+                break;
+            }
+        }
+        return ans;
+    }
+};
+
+***************************************************************************************************
