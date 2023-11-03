@@ -61,3 +61,29 @@ public:
 };
 
 ***********************************************************************************************************
+**** 1441. Build an Array With Stack Operations ( 03/11/23 ) ****
+
+class Solution {
+public:
+    vector<string> buildArray(vector<int>& target, int n) {
+        vector<string> ans;
+        bool flag = false;
+        int v,posi = 0;
+        sort(target.begin(),target.end());
+        for(int i=1;i<=n;i++){
+            if(posi >= target.size()){
+                return ans;
+            }
+            ans.push_back("Push");
+            if(target[posi] != i){
+                ans.push_back("Pop");
+            }
+            else{
+                posi++;
+            }
+        }
+        return ans;
+    }
+};
+
+*******************************************************************************************************************
