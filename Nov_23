@@ -87,3 +87,44 @@ public:
 };
 
 *******************************************************************************************************************
+**** 1535. Find the Winner of an Array Game ( 05/11//23 ) ****
+
+class Solution {
+public:
+    int getWinner(vector<int>& arr, int k) {
+        queue<int> q;
+        int n = arr[0],count=0;
+        int m = arr[0],ginn=0;
+        for(int i=1;i<arr.size();i++){
+            q.push(arr[i]);
+            m = max(m,arr[i]);
+        }
+        while(1){
+            ginn = 0;
+            while(n > q.front()){
+                count++;
+                if(count>=k){
+                    return n;
+                }
+                ginn++;
+                if(ginn > arr.size()+10){
+                    return m;
+                }
+                q.push(q.front());
+                q.pop();
+            }
+        
+            q.push(n);
+            n = q.front();
+            q.pop();
+            count = 1;
+            if(k==1){
+                return n;
+            }
+        
+        }
+        return -1;
+    }
+};
+
+********************************************************************************************************
