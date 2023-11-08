@@ -128,3 +128,31 @@ public:
 };
 
 ********************************************************************************************************
+**** 2849. Determine if a Cell Is Reachable at a Given Time ( 08/11/23 ) ****
+
+class Solution {
+public:
+     bool isReachableAtTime(int sx, int sy, int fx, int fy, int t) {
+        int x = max(sx,fx) - min(sx,fx);
+        int y = max(sy,fy) - min(sy,fy); 
+        if( t >= (max(x,y))){  
+                   if(t <= x+y){
+            return true;
+                }
+            
+            if( (t-(x+y)) > 1 ){
+                return true;
+            }
+            else{
+                if(x == 0 && y == 0){
+                return false; }
+                else{
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+};
+
+************************************************************************************************************
