@@ -156,3 +156,38 @@ public:
 };
 
 ************************************************************************************************************
+**** 1759. Count Number of Homogenous Substrings ( 09/11/23 ) ****
+
+class Solution {
+public:
+  long long int mod = 1e9+7;
+    long long int solve(long long int n){
+        return ((n*(n+1))%mod)/2;
+    }
+
+    int countHomogenous(string s) {
+        int i=0,j=0,count=0,ans=0;
+        char chr = s[i];
+        while(1){
+            if(s[j] == chr){
+                count++;
+                if(j<s.size()-1){
+                    j++;
+                }
+                else{
+                    ans = ans%mod + solve(j-i+1)%mod;
+                    return ans;
+                }
+            }
+            else{
+                ans = ans%mod + solve(j-i)%mod;
+                i = j;
+                chr = s[j];
+                count = 0;
+            }
+        }
+        return ans%mod;
+    }
+};
+
+**********************************************************************************************************
