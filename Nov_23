@@ -191,3 +191,67 @@ public:
 };
 
 **********************************************************************************************************
+**** 2642. Design Graph With Shortest Path Calculator ( 11/11/23 ) ****
+
+class Graph {
+public:
+    int size; 
+    unordered_map<int,vector<pair<int,int>>> m;
+    Graph(int n, vector<vector<int>>& edges) {
+        size = n;
+        for(int i=0;i<edges.size();i++){
+            m[edges[i][0]].push_back({edges[i][1],edges[i][2]});
+        }
+    }
+    
+    void addEdge(vector<int> edge) {
+        m[edge[0]].push_back({edge[1],edge[2]});
+        size+=1;
+    }
+
+    int shortestPath(int node1, int node2) {
+     //   for(auto k:m){
+      //      cout<<k.first<<" - ";
+      //      for(int i=0;i<k.second.size();i++){
+      //          cout<<k.second[i].first<<" ";
+      //      }
+      //      cout<<endl;
+     //   }
+        vector<bool> visited(size,false);
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+        visited[node1] = true;
+        vector<int> value(size,0);
+        pq.push({0,node1});
+        pair<int,int> p;
+        while(!pq.empty()){
+            p = pq.top();
+           // cout<<p.second<<" "<<p.first<<"  -  ";
+            if(p.second == node2){
+                return p.first;
+            }
+            pq.pop();
+            for(int i=0;i<m[p.second].size();i++){
+                    if(visited[m[p.second][i].first] == false){
+                         pq.push({p.first+m[p.second][i].second,m[p.second][i].first});
+                        visited[m[p.second][i].first] = true;
+                        value[m[p.second][i].first] = p.first+m[p.second][i].second;
+                
+                    }
+                    else{
+                        if(p.first+m[p.second][i].second < value[m[p.second][i].first])
+                        {
+                                pq.push({p.first+m[p.second][i].second,m[p.second][i].first});
+                                value[m[p.second][i].first] = p.first+m[p.second][i].second;
+                   // cout<<p.first+m[p.second][i].second<<" "<<m[p.second][i].first;
+                        }
+                   
+                    }
+                
+            }
+           // cout<<endl;
+        }
+        return -1;
+    }
+};
+
+**********************************************************************************************************************
