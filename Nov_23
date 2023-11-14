@@ -277,3 +277,46 @@ public:
 };
 
 ****************************************************************************************************************************
+**** 1930. Unique Length-3 Palindromic Subsequences ( 15/1/23 ) ****
+
+class Solution {
+public:
+    int countPalindromicSubsequence(string s) {
+        set<string> ans;
+        string str;
+        unordered_map<char,int> m2;
+        unordered_map<char,int> m1;
+        set<char> sett;
+        for(int i=0;i<s.size();i++){
+            sett.insert(s[i]);
+        }
+        vector<char> v;
+        for(auto i:sett){
+            v.push_back(i);
+        }
+        m1[s[0]]++;
+        unordered_map<string,bool> ginn;
+        int f=0;
+        for(int i=s.size()-1;i>1;i--){
+            m2[s[i]]++;
+        }
+        for(int i=1;i<s.size()-1;i++){
+     
+             for(int p=0;p<v.size();p++){
+                 if(m1[v[p]]>0 && m2[v[p]]>0){
+                     str+=v[p]; str+=s[i]; str+=v[p];
+                     if(ginn[str]==false){
+                         ginn[str]=true;
+                         f++;
+                     }
+                     str="";
+                 }
+             }
+             m1[s[i]]++;
+             m2[s[i+1]]--;
+        }
+        return f;
+    }
+};
+
+***************************************************************************************************************
