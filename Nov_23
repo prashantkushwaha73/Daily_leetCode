@@ -277,7 +277,7 @@ public:
 };
 
 ****************************************************************************************************************************
-**** 1930. Unique Length-3 Palindromic Subsequences ( 15/1/23 ) ****
+**** 1930. Unique Length-3 Palindromic Subsequences ( 15/11/23 ) ****
 
 class Solution {
 public:
