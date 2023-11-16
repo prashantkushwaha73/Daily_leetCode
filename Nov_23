@@ -320,3 +320,41 @@ public:
 };
 
 ***************************************************************************************************************
+**** 1980. Find Unique Binary String ( 16/11/23 ) ****
+
+class Solution {
+public:
+   
+   void solve(int n,string str,unordered_map<string,bool>& m,string& ans){
+       if(str.size() == n){
+           if(m[str]){
+               return;
+           }
+           else{
+               ans = str;
+               return;
+           }
+       }
+       if(ans.size() == n){
+           return;
+       }
+       solve(n,str+'0',m,ans);
+       if(ans.size() == n){
+           return;
+       }
+       solve(n,str+'1',m,ans);
+   }
+
+    string findDifferentBinaryString(vector<string>& nums) {
+        int n = nums.size();
+        unordered_map<string,bool> m;
+        for(int i=0;i<nums.size();i++){
+            m[nums[i]] = true;
+        }
+        string ans ="";
+        solve(n,"",m,ans);
+        return ans;
+    }
+};
+
+*****************************************************************************************************************************
