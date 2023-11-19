@@ -375,3 +375,26 @@ public:
 };
 
 *****************************************************************************************************
+**** 1887. Reduction Operations to Make the Array Elements Equal ( 19/11/23 ) ****
+
+class Solution {
+public:
+    int reductionOperations(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int count=0,ans=0,posi=nums.size()-1,v=nums[nums.size()-1];
+        while(1){
+            while(nums[posi] == v){
+                count++;
+                posi--;
+                if(posi<0){
+                    return ans;
+                }
+            }
+            ans += count;
+            v = nums[posi];
+        }
+        return ans;
+    }
+};
+
+***********************************************************************************************************************
