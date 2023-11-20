@@ -398,3 +398,70 @@ public:
 };
 
 ***********************************************************************************************************************
+**** 2391. Minimum Amount of Time to Collect Garbage ( 20/11/23 ) ****
+
+class Solution {
+public:
+    int garbageCollection(vector<string>& garbage, vector<int>& travel) {
+        int tm=0,tp=0,tg=0,ans=0;;
+        vector<vector<int>> v(garbage.size(),vector<int> (3,0));
+        for(int i=0;i<garbage.size();i++){
+            for(int j=0;j<garbage[i].size();j++){
+                if(garbage[i][j] == 'M'){
+                    v[i][0]++;
+                    tm++;
+                }
+                else if(garbage[i][j] == 'P'){
+                    v[i][1]++;
+                    tp++;
+                }
+                else{
+                    v[i][2]++;
+                    tg++;
+                }
+            }
+        }
+        int posi = 0;
+        cout<<tm<<" "<<tp<<" "<<tg<<endl;
+        while(tm){
+            ans += v[posi][0];
+        
+            tm -= v[posi][0];
+             if( tm==0 || posi >= travel.size()){
+                break;
+            }
+            ans += travel[posi];
+        
+            posi++;
+        }
+        
+        posi = 0;
+        while(tp){
+            ans += v[posi][1];
+        
+            tp -= v[posi][1];
+             if(tp==0 || posi >= travel.size()){
+                break;
+            }
+            ans += travel[posi];
+        
+            posi++;
+        }
+        cout<<endl;
+        posi = 0;
+        while(tg){
+            ans += v[posi][2];
+        
+            tg -= v[posi][2];
+            if( tg==0 || posi >= travel.size()){
+                break;
+            }
+            ans += travel[posi];
+        
+            posi++;
+        }
+        return ans;
+    }
+};
+
+****************************************************************************************************************
