@@ -465,3 +465,34 @@ public:
 };
 
 ****************************************************************************************************************
+**** 1814. Count Nice Pairs in an Array ( 21/11/23 ) ****
+
+class Solution {
+public:
+    int mod = 1e9+7,n,rev,ans=0;
+    int countNicePairs(vector<int>& nums) {
+      unordered_map<int,int> m;
+      n = nums[0];
+      rev = 0;
+      while(n){
+          rev = rev*10 + n%10;
+          n /= 10;
+      }
+      m[rev-nums[0]]++;
+      for(int i=1;i<nums.size();i++){
+          n = nums[i];
+      rev = 0;
+      while(n){
+          rev = rev*10 + n%10;
+          n /= 10;
+      }
+         if(m[rev-nums[i]] > 0){
+            ans = ans%mod + m[rev-nums[i]]%mod;
+          }
+         m[rev-nums[i]]++;
+      }
+      return ans%mod;
+    }
+};
+
+****************************************************************************************************************
