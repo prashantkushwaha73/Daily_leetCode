@@ -536,3 +536,19 @@ public:
 };
 
 ******************************************************************************************************
+**** 1561. Maximum Number of Coins You Can Get ( 24/11/23 ) ****
+
+class Solution {
+public:
+    int maxCoins(vector<int>& piles) {
+        sort(piles.begin(),piles.end());
+        int i=0,j=piles.size()-2,k=piles.size()-1,ans=0;
+        while(i<j){
+           ans += piles[j];
+           i++; j-=2; k-=2;
+        }
+        return ans;
+    }
+};
+
+*******************************************************************************************************
