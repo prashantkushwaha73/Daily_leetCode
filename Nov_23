@@ -552,3 +552,30 @@ public:
 };
 
 *******************************************************************************************************
+**** 1685. Sum of Absolute Differences in a Sorted Array ( 25/11/23 ) ****
+
+class Solution {
+public:
+    vector<int> getSumAbsoluteDifferences(vector<int>& nums) {
+    
+        vector<int> ans;
+        int l=0,r=0;
+        for(int i=1;i<nums.size();i++){
+          r += abs(nums[0]-nums[i]);
+    }
+      ans.push_back(l+r);
+
+      for(int i=1;i<nums.size();i++){
+            if(i-2 >= 0){
+                l = l + (i-1)*(nums[i]-nums[i-1]);
+            }
+            if(i+1 <= nums.size()-1){
+                r = r - (nums.size()-i-1)*abs(nums[i]-nums[i-1]);
+            }
+            ans.push_back(l+r);
+      }
+      return ans;
+    }
+};
+
+********************************************************************************************************
