@@ -579,3 +579,52 @@ public:
 };
 
 ********************************************************************************************************
+**** 2147. Number of Ways to Divide a Long Corridor ( 28/11/23 ) ****
+
+class Solution {
+public:
+   int mod = 1e9+7;
+    int solve(string &corri,int posi,int count,vector<vector<int>>& dp,int& v){
+        if(posi >= corri.size()-1){
+            if(count == 2){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        }
+        if(dp[posi][count]!=-1){
+            return dp[posi][count];
+        }
+        v = 0;
+        if(count==2){
+            if(corri[posi+1]=='P'){
+            v = v%mod + solve(corri,posi+1,0,dp,v)%mod;
+            v = v%mod + solve(corri,posi+1,count,dp,v)%mod;
+            }
+            else{
+                 v = v%mod + solve(corri,posi+1,1,dp,v)%mod;
+            }
+        }
+        else{
+            if(corri[posi+1]=='P'){
+                v = v%mod + solve(corri,posi+1,count,dp,v)%mod;
+            }
+            else{
+                v = v%mod + solve(corri,posi+1,count+1,dp,v)%mod;
+            }
+        }
+        return dp[posi][count] = v%mod;
+    }
+
+    int numberOfWays(string corri) {
+        vector<vector<int>> dp(corri.size(),vector<int> (3,-1));
+        int v;
+        if(corri[0]=='P'){
+            return solve(corri,0,0,dp,v)%mod;
+        }
+        return solve(corri,0,1,dp,v)%mod;
+    }
+};
+
+*********************************************************************************************************
