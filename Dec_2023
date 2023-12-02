@@ -17,3 +17,34 @@ public:
 };
 
 ***************************************************************************************************************************
+**** 1160. Find Words That Can Be Formed by Characters ( 02/12/23 ) ****
+
+class Solution {
+public:
+    int countCharacters(vector<string>& words, string chars) {
+       unordered_map<char,int> m;
+       for(int i=0;i<chars.size();i++){
+           m[chars[i]]++;
+       } 
+       unordered_map<char,int> count;
+       int ans = 0;
+       bool flag;
+       for(int i=0;i<words.size();i++){
+           flag = true;
+           for(int j=0;j<words[i].size();j++){
+               count[words[i][j]]++;
+               if(count[words[i][j]] > m[words[i][j]]){
+                   flag = false;
+                   break;
+               }
+           }
+           if(flag){
+               ans+=words[i].size();
+           }
+           count.clear();
+       }
+       return ans;
+    }
+};
+
+****************************************************************************************************************
