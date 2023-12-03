@@ -48,3 +48,19 @@ public:
 };
 
 ****************************************************************************************************************
+****
+
+class Solution {
+public:
+    int minTimeToVisitAllPoints(vector<vector<int>>& points) {
+        int ans = 0,i,j;
+        for(int p=1;p<points.size();p++){
+               i = abs(points[p][0]-points[p-1][0]); j = abs(points[p][1]-points[p-1][1]);
+               ans += min(i,j);
+               ans += max(i,j)-min(i,j);
+        }
+        return ans;
+    }
+};
+
+********************************************************************************************************************
