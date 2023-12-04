@@ -64,3 +64,25 @@ public:
 };
 
 ********************************************************************************************************************
+**** 2264. Largest 3-Same-Digit Number in String ( 04/12/23 ) ****
+
+class Solution {
+public:
+    string largestGoodInteger(string num) {
+        int maxi = INT_MIN;
+        string ans="";
+        int i=0,j=2;
+        while(j<num.size()){
+            if(num[i]==num[i+1] && num[i]==num[j] && num[i]>maxi){
+                 maxi = num[i];
+                 ans = num.substr(i,j-i+1);
+            }
+            else{
+                i++; j++;
+            }
+        }
+        return ans;
+    }
+};
+
+****************************************************************************************************************************
