@@ -208,3 +208,32 @@ public:
 };
 
 **********************************************************************************************************************
+**** 1287. Element Appearing More Than 25% In Sorted Array ( 12/12/23 ) ****
+
+class Solution {
+public:
+    int findSpecialInteger(vector<int>& arr) {
+        int size = arr.size()/4 +1;
+        int j=1,v=arr[0],count=1;
+        while(j<arr.size()){
+            if(arr[j]!=v){
+                if(count>=size){
+                    return v;
+                }
+                count = 1;
+                v = arr[j];
+                j++;
+            }
+            else{
+              count++;
+            j++;
+            }
+        }
+         if(count>=size){
+                    return v;
+                }
+        return arr[0];
+    }
+};
+
+******************************************************************************************************************
