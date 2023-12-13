@@ -248,3 +248,51 @@ public:
 };
 
 **********************************************************************************************************************
+**** 1582. Special Positions in a Binary Matrix ( 13/12/23 ) ****
+
+class Solution {
+public:
+   
+   bool solve(int r,int c,vector<vector<int>>& mat){
+       int ra =r+1,rp=r-1,ca=c+1,cp=c-1;
+       while(ra<mat.size()){
+           if(mat[ra][c]){
+               return false;
+           }
+           ra++;
+       }
+       while(rp>=0){
+           if(mat[rp][c]){
+               return false;
+           }
+           rp--;
+       }
+       while(ca<mat[0].size()){
+           if(mat[r][ca]){
+               return false;
+           }
+           ca++;
+   }
+   while(cp>=0){
+       if(mat[r][cp]){
+           return false;
+       }
+       cp--;
+   }
+   return true;
+   }
+
+    int numSpecial(vector<vector<int>>& mat) {
+        int ans =  0;
+        for(int i=0;i<mat.size();i++){
+            for(int j=0;j<mat[0].size();j++){
+                if(mat[i][j] && solve(i,j,mat)){
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+};
+
+****************************************************************************************************************
