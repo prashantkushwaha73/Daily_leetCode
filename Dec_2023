@@ -296,3 +296,46 @@ public:
 };
 
 ****************************************************************************************************************
+**** 2482. Difference Between Ones and Zeros in Row and Column ( 14/12/23 ) ****
+
+class Solution {
+public:
+    vector<vector<int>> onesMinusZeros(vector<vector<int>>& grid) {
+        vector<pair<int,int>> r(grid.size(),{0,0});
+        vector<pair<int,int>> c(grid[0].size(),{0,0});
+        int z,o;
+        for(int i=0;i<grid.size();i++){
+            z=0;o=0;
+            for(int j=0;j<grid[0].size();j++){
+                 if(grid[i][j]){
+                     o++;
+                 }
+                 else{
+                    z++;
+                 }
+            }
+            r[i] = {z,o};
+        }
+        for(int j=0;j<grid[0].size();j++){
+            z=0;o=0;
+            for(int i=0;i<grid.size();i++){
+                if(grid[i][j]){
+                    o++;
+                }
+                else{
+                    z++;
+                }
+            }
+            c[j] = {z,o};
+        }
+        vector<vector<int>> ans(grid.size(),vector<int> (grid[0].size(),-1));
+        for(int i=0;i<grid.size();i++){
+            for(int j=0;j<grid[0].size();j++){
+                ans[i][j] = r[i].second+c[j].second-r[i].first-c[j].first;
+            }
+        }
+        return ans;
+    }
+};
+
+*****************************************************************************************************************
