@@ -350,3 +350,45 @@ public:
 };
 
 ******************************************************************************************************************
+**** 1758. Minimum Changes To Make Alternating Binary String ( 24/12/23 ) ****
+
+class Solution {
+public:
+    int minOperations(string s) {
+        int first = 0,second = 0;
+        int i=0,j=1;
+        while(1){
+            if(i>=s.size()){
+                break;
+            }
+            if(j==s.size()){
+                 if(s[i]!='0'){
+                    first++;
+                }
+             
+                if(s[i]!='1'){
+                    second++;
+                }
+           break;
+            }
+           if( j<s.size()){
+                if(s[i]!='0'){
+                    first++;
+                }
+                if(s[j]!='1'){
+                    first++;
+                }
+                if(s[i]!='1'){
+                    second++;
+                }
+                if(s[j]!='0'){
+                    second++;
+                }
+           }
+           i+=2; j+=2;
+        }
+        return min(first,second);
+    }
+};
+
+**********************************************************************************************************
