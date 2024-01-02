@@ -1,0 +1,34 @@
+********************************************************************************************************
+**** 2610. Convert an Array Into a 2D Array With Conditions ( 02/01/23 ) ****
+
+class Solution {
+public:
+    vector<vector<int>> findMatrix(vector<int>& nums) {
+        vector<vector<int>> ans;
+        unordered_map<int,int> m;
+        for(int i=0;i<nums.size();i++){
+            m[nums[i]]++;
+        }
+        queue<pair<int,int>> q;
+        for(auto i:m){
+            q.push({i.first,i.second});
+        }
+        vector<int> v;
+        int s;
+        while(!q.empty()){
+            s = q.size();
+            for(int i=0;i<s;i++){
+                v.push_back(q.front().first);
+                if(q.front().second>1){
+                    q.push({q.front().first,q.front().second-1});
+                }
+                q.pop();
+            }
+            ans.push_back(v);
+            v.clear();
+        }
+        return ans;
+    }
+};
+
+*************************************************************************************************************************
