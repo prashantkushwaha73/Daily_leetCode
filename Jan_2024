@@ -32,3 +32,26 @@ public:
 };
 
 *************************************************************************************************************************
+**** 938. Range Sum of BST ( 08/01/23 ) ****
+
+class Solution {
+public:
+    void solve(TreeNode* root,int low,int high,int& ans){
+        if(root==NULL){
+            return;
+        }
+        solve(root->left,low,high,ans);
+        if(root->val <= high && root->val >= low){
+            ans += root->val;
+        }
+        solve(root->right,low,high,ans);
+    }
+
+    int rangeSumBST(TreeNode* root, int low, int high) {
+        int ans = 0;
+        solve(root,low,high,ans);
+        return ans;
+    }
+};
+
+***************************************************************************************************************************
