@@ -55,3 +55,27 @@ public:
 };
 
 ***************************************************************************************************************************
+**** 872. Leaf-Similar Trees ( 09/01/23 ) ****
+
+class Solution {
+public:
+    void solve(TreeNode* root,vector<int>& r){
+        if(root==NULL){
+            return;
+        }
+        solve(root->left,r);
+        if(root->left==NULL && root->right==NULL){
+            r.push_back(root->val);
+        }
+        solve(root->right,r);
+    }
+    bool leafSimilar(TreeNode* root1, TreeNode* root2) {
+        vector<int> r;
+        solve(root1,r);
+        vector<int> v;
+        solve(root2,v);
+        return r==v;
+    }
+};
+
+********************************************************************************************************************************
