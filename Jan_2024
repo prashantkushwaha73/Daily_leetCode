@@ -120,3 +120,29 @@ public:
 };
 
 ***************************************************************************************************
+**** 1704. Determine if String Halves Are Alike ( 12/01/24) ****
+
+class Solution {
+public:
+    bool halvesAreAlike(string s) {
+        vector<char> match={'a','e','i','o','u','A','E','I','O','U'};
+        string a="",b="";
+        int size=s.size(),i=0;
+        size=size/2;
+        while(i<size){
+            if(count(match.begin(),match.end(),s[i]) != 0){ 
+            a.push_back(s[i]);}
+             if(count(match.begin(),match.end(),s[s.size()-i-1]) != 0){ 
+            b.push_back(s[i]);}
+            i++;
+        }
+        if(a.size()==b.size()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+};
+
+*********************************************************************************************************
