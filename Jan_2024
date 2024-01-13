@@ -146,3 +146,34 @@ public:
 };
 
 *********************************************************************************************************
+**** 1347. Minimum Number of Steps to Make Two Strings Anagram ( 13/01/24 ) ****
+
+class Solution {
+public:
+    int minSteps(string s, string t) {
+        unordered_map<char,int> m1;
+        unordered_map<char,int> m2;
+        for(int i=0;i<s.size();i++){
+            m1[s[i]]++;
+        }
+        int ans = 0;
+        for(int i=0;i<t.size();i++){
+            m2[t[i]]++;
+        }
+        for(auto i:m2){
+            if(i.second == m1[i.first]){
+                i.second = 0;
+            }
+            else if(i.second > m1[i.first]){
+                i.second = i.second - m1[i.first];
+                ans += i.second;
+            }
+            else{
+                i.second = 0;
+            }
+        }
+        return ans;
+    }
+};
+
+***************************************************************************************************************
