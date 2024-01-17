@@ -254,3 +254,41 @@ public:
 };
 
 *******************************************************************************************************************
+**** 1207. Unique Number of Occurrences ( 17/01/24 ) ****
+
+class Solution {
+public:
+    bool uniqueOccurrences(vector<int>& arr) {
+        vector<int> store;
+        int key=1001,cont=-1,i=0;
+        sort(arr.begin(),arr.end());
+        while(i<arr.size()){
+            if(arr[i]!=key){
+                
+                    if(count(store.begin(),store.end(),cont) == 0){
+                    store.push_back(cont);}
+                    else{
+                        return false;
+                    }
+                
+                key=arr[i];
+                cont=1;
+            }
+            else{
+                cont++;
+            }
+            i++;
+            
+        }
+        if(i==arr.size()){
+        if(count(store.begin(),store.end(),cont) == 0){
+                    store.push_back(cont);}
+                    else{
+                        return false;
+                    }
+        }
+        return true;
+    }
+};
+
+*****************************************************************************************************************************
