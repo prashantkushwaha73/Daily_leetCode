@@ -292,3 +292,29 @@ public:
 };
 
 *****************************************************************************************************************************
+**** 70. Climbing Stairs ( 18/01/24 ) ****
+
+class Solution {
+public:
+    int solve(int posi,int n,vector<int>& dp){
+        if(posi==n){
+            return 1;
+        }
+        if(posi > n){
+            return 0;
+        }
+        if(dp[posi]!=-1){
+            return dp[posi];
+        }
+        int v = 0;
+        v += solve(posi+1,n,dp);
+        v += solve(posi+2,n,dp);
+        return dp[posi] = v;
+    }
+    int climbStairs(int n) {
+        vector<int> dp(n,-1);
+        return solve(0,n,dp);
+    }
+};
+
+******************************************************************************************************************************
