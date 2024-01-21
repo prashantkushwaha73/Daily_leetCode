@@ -318,3 +318,27 @@ public:
 };
 
 ******************************************************************************************************************************
+**** 198. House Robber ( 21/01/24 ) ****
+
+class Solution {
+public:
+
+    int solve(int posi,vector<int>& nums,vector<int>& dp){
+        if(posi>=nums.size()){
+            return 0;
+        }
+        if(dp[posi]!=-1){
+            return dp[posi];
+        }
+        int a = nums[posi]+solve(posi+2,nums,dp);
+        int b = solve(posi+1,nums,dp);
+        return dp[posi] = max(a,b);
+    }
+
+    int rob(vector<int>& nums) {
+        vector<int> dp(nums.size(),-1);
+        return solve(0,nums,dp);
+    }
+};
+
+************************************************************************************************************************************
