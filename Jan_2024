@@ -367,3 +367,54 @@ public:
 };
 
 *****************************************************************************************************************************************
+**** 1239. Maximum Length of a Concatenated String with Unique Characters ( 23/01/24 ) ****
+
+class Solution {
+public:
+  
+    bool check(string s,unordered_map<char,bool>& m){
+        for(int i=0;i<s.size();i++){
+            if(m[s[i]]){
+                return false;
+            }
+        }
+        unordered_map<char,bool> p;
+        for(int i=0;i<s.size();i++){
+           if(p[s[i]]){
+               return false;
+           }
+           p[s[i]]=true;
+        }
+        for(int i=0;i<s.size();i++){
+            m[s[i]]=true;
+        }
+        return true;
+    }
+
+    void dlt(string s,unordered_map<char,bool>& m){
+        for(int i=0;i<s.size();i++){
+            m[s[i]]=false;
+        }
+    }
+
+    void solve(vector<string>& arr,unordered_map<char,bool>& m,int posi,int count,int& ans){
+        if(posi >= arr.size()){
+            ans = max(ans,count);
+            return;
+        }
+        if(check(arr[posi],m)){
+            solve(arr,m,posi+1,count+arr[posi].size(),ans);
+            dlt(arr[posi],m);
+        }
+        solve(arr,m,posi+1,count,ans);
+    }
+
+    int maxLength(vector<string>& arr) {
+        unordered_map<char,bool> m;
+        int ans = 0; 
+        solve(arr,m,0,0,ans);
+        return ans;
+    }
+};
+
+*********************************************************************************************************************
