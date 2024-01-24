@@ -418,3 +418,51 @@ public:
 };
 
 *********************************************************************************************************************
+**** 1457. Pseudo-Palindromic Paths in a Binary Tree ( 24/01/24 ) ****
+
+class Solution {
+public:
+   bool check(vector<int> v){
+       int count=0;
+       for(int i=1;i<10;i++){
+           if(v[i]){
+               count++;
+           }
+       }
+       if(count<=1){
+           return true;
+       }
+       return false;
+   }
+
+    void solve(TreeNode* root,vector<int> v,int& ans){
+        if(root==NULL){
+            return;
+        }
+        if(v[root->val]){
+            v[root->val]--;
+        }
+        else{
+            v[root->val]++;
+        }
+        if(root->left==NULL && root->right==NULL && check(v)){
+             ans++;
+        }
+        solve(root->left,v,ans);
+        solve(root->right,v,ans);
+    }
+
+    int pseudoPalindromicPaths (TreeNode* root) {
+        if(root->left==NULL &&  root->right==NULL){
+            return 1;
+        }
+        int ans = 0;
+        vector<int> v(10,0);
+        v[root->val]++;
+        solve(root->left,v,ans);
+        solve(root->right,v,ans);
+        return ans;
+    }
+};
+
+*****************************************************************************************************************
