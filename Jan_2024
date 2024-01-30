@@ -539,3 +539,51 @@ public:
 };
 
 ******************************************************************************************************************
+**** 150. Evaluate Reverse Polish Notation ( 30/01/24 ) ****
+
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        vector<string> op={"+","-","*","/"};
+        long int a,b;
+        stack<long int> dabba;
+        for(int i=0;i<tokens.size();i++){
+            if(count(op.begin(),op.end(),tokens[i])==1){
+                if(tokens[i]=="+"){
+                    a=dabba.top();
+                    dabba.pop();
+                    b=dabba.top();
+                    dabba.pop();
+                    dabba.push(a+b);
+                }
+                else if(tokens[i]=="-"){
+                    b=dabba.top();
+                    dabba.pop();
+                    a=dabba.top();
+                    dabba.pop();
+                    dabba.push(a-b);
+                }
+                else if(tokens[i]=="*"){
+                    b=dabba.top();
+                    dabba.pop();
+                    a=dabba.top();
+                    dabba.pop();
+                    dabba.push(a*b);
+                }
+                else{
+                   b=dabba.top();
+                    dabba.pop();
+                    a=dabba.top();
+                    dabba.pop();
+                    dabba.push(a/b);
+                }
+            }
+            else{
+                dabba.push(stoi(tokens[i]));
+            }
+        }
+        return dabba.top();
+    }
+};
+
+***********************************************************************************************************************
