@@ -32,3 +32,33 @@ public:
 };
 
 ********************************************************************************************************************************************************
+**** 1291. Sequential Digits ( 02/02/24 ) ****
+
+class Solution {
+public:
+    vector<int> sequentialDigits(int low, int high) {
+        int v,p;
+        vector<int> ans;
+        for(int i=1;i<9;i++){
+            v=i;
+            p=i;
+            while(1){
+               if(v>high){
+                   break;
+               }
+               else if(v>=low && v<=high){
+                   ans.push_back(v);
+               }
+               p++;
+               if(p>9){
+                   break;
+               }
+               v = (v*10)+p;
+            }
+        }
+        sort(ans.begin(),ans.end());
+        return ans;
+    }
+};
+
+***********************************************************************************************************************
