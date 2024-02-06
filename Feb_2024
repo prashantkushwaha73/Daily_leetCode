@@ -81,3 +81,49 @@ public:
 };
 
 ****************************************************************************************************************************
+**** 49. Group Anagrams ( 06/02/24 ) ****
+
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        string s;
+        vector<string> copy=strs;
+        for(int i=0;i<strs.size();i++){
+            sort(strs[i].begin(),strs[i].end());
+        }
+    //-------------------------------------------------    
+        vector<vector<int>> fill;
+        vector<int> fil;
+        vector<string> gap;
+        for(int j=0;j<strs.size();j++){
+            if(count(gap.begin(),gap.end(),strs[j])==0){
+                s=strs[j];
+                gap.push_back(s);
+                for(int k=0;k<strs.size();k++){
+                    if(strs[k]==s){
+                       fil.push_back(k); 
+                    }
+                }
+                fill.push_back(fil);
+                fil.clear();
+                
+            }
+        }
+        
+        
+        
+ //------------------------------------------------------------------
+        vector<vector<string>> ans;
+        vector<string> ao;
+        for(int i=0;i<fill.size();i++){
+            for(int j=0;j<fill[i].size();j++){
+               ao.push_back(copy[fill[i][j]]);
+            }
+           ans.push_back(ao);
+            ao.clear();
+        }
+        return ans;
+    }
+};
+
+*******************************************************************************************************************
