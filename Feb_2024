@@ -158,3 +158,50 @@ public:
 };
 
 **********************************************************************************************************************
+**** 1463. Cherry Pickup II ( 11/02/24 ) ****
+
+class Solution {
+public:
+   
+    int solve(int r,int s,int e,vector<vector<int>>& grid,vector<vector<vector<int>>>& dp){
+        if(r>=grid.size() || s<0 || s>=grid[0].size() || e<0 || e>= grid[0].size()){
+            return 0;
+        }
+        if(dp[r][s][e]!=-1){
+            return dp[r][s][e];
+        }
+        int a1 = solve(r+1,s-1,e-1,grid,dp);
+        int a2 = solve(r+1,s-1,e,grid,dp);
+        int a3 = solve(r+1,s-1,e+1,grid,dp);
+
+        int b1 = solve(r+1,s,e-1,grid,dp);
+        int b2 = solve(r+1,s,e,grid,dp);
+        int b3 = solve(r+1,s,e+1,grid,dp);
+
+        int c1 = solve(r+1,s+1,e-1,grid,dp);
+        int c2 = solve(r+1,s+1,e,grid,dp);
+        int c3 = solve(r+1,s+1,e+1,grid,dp);
+        
+        int a4,b4,c4;
+        if(s==e){
+            a4 = grid[r][s] + max(a1,max(a2,a3));
+            b4 = grid[r][s] + max(b1,max(b2,b3));
+            c4 = grid[r][s] + max(c1,max(c2,c3));
+        }
+        else{
+            a4 = grid[r][s]+grid[r][e] + max(a1,max(a2,a3));
+            b4 = grid[r][s]+grid[r][e] + max(b1,max(b2,b3));
+            c4 = grid[r][s]+grid[r][e] + max(c1,max(c2,c3));
+        }
+        
+        return dp[r][s][e] = max(a4,max(b4,c4));
+        
+    }
+
+    int cherryPickup(vector<vector<int>>& grid) {
+        vector<vector<vector<int>>> dp(grid.size(),vector<vector<int>> (grid[0].size(),vector<int> (grid[0].size(),-1)));
+        return solve(0,0,grid[0].size()-1,grid,dp);
+    }
+};
+
+*****************************************************************************************************************************
