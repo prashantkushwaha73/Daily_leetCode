@@ -223,3 +223,29 @@ public:
 };
 
 ******************************************************************************************************************************
+**** 2108. Find First Palindromic String in the Array ( 13/02/24 ) ****
+
+class Solution {
+public:
+    bool solve(string s){
+        int i=0,j=s.size()-1;
+        while(i<j){
+            if(s[i]!=s[j]){
+                return false;
+            }
+            i++; j--;
+        }
+        return true;
+    }
+
+    string firstPalindrome(vector<string>& words) {
+        for(int i=0;i<words.size();i++){
+            if(solve(words[i])){
+                return words[i];
+            }
+        }
+        return "";
+    }
+};
+
+*********************************************************************************************************************************
