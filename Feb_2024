@@ -284,3 +284,42 @@ public:
 };
 
 ************************************************************************************************************************
+**** 1481. Least Number of Unique Integers after K Removals ( 16/02/24 ) ****
+
+class Solution {
+public:
+
+    class Compare {
+public:
+    bool operator()(pair<int,int> below, pair<int,int> above)
+    {
+        if(below.second>=above.second){
+           return true;
+        }
+        return false;
+    }
+};
+   
+    int findLeastNumOfUniqueInts(vector<int>& arr, int k) {
+        unordered_map<int,int> m;
+        for(int i=0;i<arr.size();i++){
+            m[arr[i]]++;
+        }
+        priority_queue<pair<int,int>,vector<pair<int,int>>,Compare> pq;
+        for(auto i:m){
+            pq.push({i.first,i.second});
+        } 
+        pair<int,int> p;
+        while(k){
+            p = pq.top();
+            pq.pop();
+            if(p.second>1){
+                pq.push({p.first,p.second-1});
+            }
+            k--;
+        }
+        return pq.size();
+    }
+};
+
+****************************************************************************************************************************
