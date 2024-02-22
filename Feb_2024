@@ -339,3 +339,50 @@ public:
 };
 
 ****************************************************************************************************************************
+**** 997. Find the Town Judge ( 22/02/24 ) ****
+
+//class compare{
+//    public:
+//     bool operator()(vector<int> a,vector<int> b){
+//         return b[0] > a[0];
+//     }
+//};
+class Solution {
+public:
+    int findJudge(int n, vector<vector<int>>& trust) {
+        
+        if(n==1){
+            return 1;
+        }
+        sort(trust.begin(),trust.end());
+        map<int,pair<bool,bool>> mapp;
+        for(int i=0;i<trust.size();i++){
+            mapp[trust[i][0]]=make_pair(true,false);
+            if(mapp[trust[i][1]].first==true){
+                continue;
+            }
+            else{
+            mapp[trust[i][1]]=make_pair(true,true); }
+        }
+        vector<int> store;
+        for(auto i:mapp){
+            if(i.second.second==true){
+                store.push_back(i.first);
+            }
+        }
+        for(int i=0;i<store.size();i++){
+            int count=0;
+            for(int j=0;j<trust.size();j++){
+                if(trust[j][1]==store[i]){
+                    count++;
+                }
+            }
+            if(count==(n-1)){
+                return store[i];
+            }
+        }
+        return -1;
+    }
+};
+
+*************************************************************************************************************************
