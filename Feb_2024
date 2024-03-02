@@ -491,4 +491,3 @@ public:
         return v[0]->val;
     }
 };
-
