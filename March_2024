@@ -150,3 +150,62 @@ public:
 };
 
 **************************************************************************************************************************************
+**** 1171. Remove Zero Sum Consecutive Nodes from Linked List ( 12/03/24 ) ****
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    
+    pair<ListNode*,bool> solve(ListNode* head){
+        int sum = head->val;
+        if(sum==0){
+            return {head->next,false};
+        }
+        ListNode* temp = head->next;
+        while(temp){
+            sum += temp->val;
+            if(sum==0){
+                return {temp->next,false};
+            }
+            temp = temp->next;
+        }
+        return {head,true};
+   }
+
+    ListNode* removeZeroSumSublists(ListNode* head) {
+        ListNode* ans = new ListNode(-1);
+        ListNode* pemp = ans;
+        pair<ListNode*,bool> p;
+        p = solve(head);
+        while(1){
+            if(p.first==NULL){
+                return ans->next;
+            }
+           if(p.second){
+             pemp->next = new ListNode(p.first->val);
+             pemp = pemp->next;
+             if(p.first->next==NULL){
+                return ans->next;
+             }
+             p = solve(p.first->next);
+           }
+           else{
+            if(p.first==NULL){
+                return ans->next;
+            }
+            p = solve(p.first);
+           }
+        }
+        return ans->next;
+    }
+};
+
+**************************************************************************************************************************
