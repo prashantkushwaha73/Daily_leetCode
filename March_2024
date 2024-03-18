@@ -227,3 +227,28 @@ public:
 };
 
 **************************************************************************************************************************
+**** 452. Minimum Number of Arrows to Burst Balloons ( 18/03/24 ) ****
+
+class Solution {
+public:
+    int findMinArrowShots(vector<vector<int>>& points) {
+        sort(points.begin(),points.end());
+        int ans=0,start=0,finish=0,maxi=points[0][0],mini=points[0][1];
+        while(finish < points.size()){
+            while( finish < points.size() && points[finish][0]>=maxi && points[finish][0]<=mini){
+                maxi=max(maxi,points[finish][0]);
+                mini=min(mini,points[finish][1]);
+                finish++;
+            }
+            if(finish<points.size()){
+                maxi=points[finish][0];
+                mini=points[finish][1];
+            }
+            ans++;
+            start=finish;   
+        }
+        return ans;
+    }
+};
+
+**********************************************************************************************************************************
