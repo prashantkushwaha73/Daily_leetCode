@@ -252,3 +252,61 @@ public:
 };
 
 **********************************************************************************************************************************
+**** 621. Task Scheduler ( 19/03/24 ) ****
+
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        unordered_map<char,int> m;
+        for(int i=0;i<tasks.size();i++){
+            m[tasks[i]]++;
+        }
+        priority_queue<int> pq;
+        for(auto i:m){
+            pq.push(i.second);
+        }
+        queue<int> q;
+        int ans = 0;
+        int v,size;
+        while(!pq.empty()){
+            size = pq.size();
+            if(n<size){
+                  for(int i=0;i<=n;i++){
+                    v=pq.top();
+                    pq.pop();
+                    ans++;
+                    v--;
+                    if(v){
+                        q.push(v);
+                    }
+                  }
+                  while(!q.empty()){
+                    pq.push(q.front());
+                    q.pop();
+                  }
+            }
+            else{
+                 for(int i=0;i<size;i++){
+                v=pq.top();
+                pq.pop();
+                ans++;
+                v--;
+                if(v){
+                    q.push(v);
+                }
+            }
+            while(!q.empty()){
+                    pq.push(q.front());
+                    q.pop();
+                }
+            if(pq.size()){
+                ans += (n-size+1);
+            }
+            }
+            
+        }
+        return ans;
+    }
+};
+
+****************************************************************************************************************************
