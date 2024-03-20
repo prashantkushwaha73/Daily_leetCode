@@ -310,3 +310,52 @@ public:
 };
 
 ****************************************************************************************************************************
+**** 1669. Merge In Between Linked Lists ( 20/03/24 ) ****
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+   
+    ListNode* mergeInBetween(ListNode* list1, int a, int b, ListNode* list2) {
+        ListNode* e;
+        ListNode* temp = list2;
+        while(temp->next){
+            temp=temp->next;
+        }
+        e=temp;
+        temp=list1;
+
+        bool flag = false;
+        if(a==0){
+             flag = true;
+        }
+        ListNode* first; ListNode* last;
+        for(int i=0;i<=b;i++){
+            if(i==a-1){
+                first = temp;
+            }
+            if(i==b){
+                last=temp;
+            }
+            temp=temp->next;
+        }
+        first->next = list2;
+        e->next = last->next;
+        if(flag){
+            e->next = last->next;
+            return list2;
+        }
+        return list1;
+        }
+};
+
+***************************************************************************************************************************
