@@ -34,3 +34,31 @@ public:
 };
 
 ******************************************************************************************************************************************
+**** Isomorphic Strings ( 02/04/24 ) ****
+
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        unordered_map<char,bool> check;
+        unordered_map<char,char> m;
+        unordered_map<char,bool> check2;
+        unordered_map<char,char> m2;
+        for(int i=0;i<s.size();i++){
+            if(check[s[i]] && m[s[i]]!=t[i]){
+                 return false;
+            }
+            else{
+                if(check2[t[i]] && m2[t[i]]!=s[i]){
+                    return false;
+                }
+                m[s[i]]=t[i];
+                check[s[i]]=true;
+                check2[t[i]]=true;
+                m2[t[i]]=s[i];
+            }
+        }
+        return true;
+    }
+};
+
+******************************************************************************************************************************************
