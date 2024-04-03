@@ -62,3 +62,56 @@ public:
 };
 
 ******************************************************************************************************************************************
+**** Word Search ( 03/04/24 ) ****
+
+class Solution {
+public:
+   
+    void solve(vector<vector<char>>& board,int i,int j,string& word,int posi,bool& ans,map<pair<int,int>,bool>& visited){
+         if(posi==word.size()){
+            ans = true;
+            return;
+         }
+         //// right
+         if(j+1<board[0].size() && board[i][j+1]==word[posi] && visited[{i,j+1}]==false){
+            visited[{i,j+1}]=true;
+            solve(board,i,j+1,word,posi+1,ans,visited);
+            visited[{i,j+1}]=false;
+         }
+         //// left
+          if(j-1>=0 && board[i][j-1]==word[posi] && visited[{i,j-1}]==false){
+            visited[{i,j-1}]=true;
+            solve(board,i,j-1,word,posi+1,ans,visited);
+            visited[{i,j-1}]=false;
+         }
+         //// down
+          if(i+1<board.size() && board[i+1][j]==word[posi] && visited[{i+1,j}]==false){
+            visited[{i+1,j}]=true;
+            solve(board,i+1,j,word,posi+1,ans,visited);
+            visited[{i+1,j}]=false;
+         }
+         //// up
+          if(i-1>=0 && board[i-1][j]==word[posi] && visited[{i-1,j}]==false){
+            visited[{i-1,j}]=true;
+            solve(board,i-1,j,word,posi+1,ans,visited);
+            visited[{i-1,j}]=false;
+          }
+    }
+
+    bool exist(vector<vector<char>>& board, string word) {
+        map<pair<int,int>,bool> visited;
+        bool ans = false;
+        for(int i=0;i<board.size();i++){
+            for(int j=0;j<board[0].size();j++){
+                if(board[i][j]==word[0]){
+                    visited[{i,j}]=true;
+                    solve(board,i,j,word,1,ans,visited);
+                    visited[{i,j}]=false;
+                }
+            }
+        }
+        return ans;
+    }
+};
+
+********************************************************************************************************************
