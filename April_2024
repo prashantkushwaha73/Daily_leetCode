@@ -115,3 +115,40 @@ public:
 };
 
 ********************************************************************************************************************
+**** Make The String Great ( 05/04/24 ) ****
+
+class Solution {
+public:
+    string makeGood(string s) {
+        int size=s.size(),j=0;
+        if(size==1){
+            return s;
+        }
+        for(int i=0;i<size-1;i++){
+            j=i+1;
+            if( ((s[i]-'a'>=0&&s[i]-'a'<=25)&&(s[j]-'A'>=0&&s[j]-'A'<=25))||((s[i]-'A'>=0&&s[i]-'A'<=25)&&(s[j]-'a'>=0&&s[j]-'a'<=25))){
+            if(  (char)toupper(s[i]) ==  (char)toupper(s[j])  ){
+                s.erase(s.begin()+i);
+                i--;
+                j--;
+                s.erase(s.begin()+j);
+            
+                size--;
+                size--;
+            }
+               if(size==0 || size==1){
+                   break;
+               } 
+                if(i < 0){
+                   continue;
+               }
+            if((((s[i]-'a'>=0&&s[i]-'a'<=25)&&(s[j]-'A'>=0&&s[j]-'A'<=25))||((s[i]-'A'>=0&&s[i]-'A'<=25)&&(s[j]-'a'>=0&&s[j]-'a'<=25))) && (  (char)toupper(s[i]) ==  (char)toupper(s[j])  )){
+                i--;
+            }
+            }
+        }
+        return s;
+    }
+};
+
+********************************************************************************************************************************
