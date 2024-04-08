@@ -151,4 +151,62 @@ public:
     }
 };
 
-********************************************************************************************************************************
+************************************************************************************************************************************
+**** Number of Students Unable to Eat Lunch ( 08/04/24 ) ****
+
+class Solution {
+public:
+    int countStudents(vector<int>& students, vector<int>& sandwiches) {
+        int bzero=0,bone=0,szero=0,sone=0,n=students.size();
+         stack<int> s;
+        queue<int> b;
+        for(int i=0;i<n;i++){
+            b.push(students[i]);
+            s.push(sandwiches[n-(i+1)]);
+            if(students[i]==0){
+                bzero++;
+            }
+            else{
+                bone++;
+            }
+            if(sandwiches[i]==0){
+                szero++;
+            }
+            else{
+                sone++;
+            }
+        }
+        while(!b.empty()){
+            if(s.top()==0 && bzero==0){
+                 return b.size();
+            }
+            if(s.top()==1 && bone==0){
+                return b.size();
+            }
+            if(b.front() == s.top()){
+                cout<<b.front()<<" "<<s.top()<<endl;
+                if(b.front()==0){
+                    bzero--;
+                    szero--;
+                    s.pop();
+                    b.pop();
+                
+                }
+                else{
+                    bone--;
+                    sone--;
+                    s.pop();
+                    b.pop();
+                }
+            }
+            else{
+                b.push(b.front());
+                b.pop();
+            }
+        }
+        return b.size();
+    }
+};
+
+*******************************************************************************************************************
+
