@@ -313,3 +313,42 @@ public:
     }
 };
 
+***************************************************************************************************************************
+**** Find if Path Exists in Graph ( 21/04/24 ) ****
+
+class Solution {
+public:
+    bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
+        if(source==destination){
+            return true;
+        }
+        map<int,list<int>> store;
+        for(auto i:edges){
+            int u,v;
+            u=i[0];
+            v=i[1];
+            store[u].push_back(v);
+            store[v].push_back(u);
+        }
+        queue<int> q;
+        vector<bool> visited(n,false);
+        q.push(source);
+        visited[source]=true;
+        while(!q.empty()){
+            int temp=q.front();
+            q.pop();
+            for(auto i:store[temp]){
+                if(visited[i]==false){
+                    if(i==destination){
+                        return true;
+                    }
+                    q.push(i);
+                    visited[i]=true;
+                }
+            }
+        }
+        return false;
+    }
+};
+
+*******************************************************************************************************************************
