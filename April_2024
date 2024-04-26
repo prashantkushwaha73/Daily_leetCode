@@ -382,3 +382,35 @@ public:
 };
 
 **************************************************************************************************************************************
+**** 1289. Minimum Falling Path Sum II ( 26/04/24 ) ****
+
+class Solution {
+public:
+    int solve(int x,int y,vector<vector<int>>& grid,vector<vector<int>>& dp){
+        if(x==grid.size()-1){
+            return grid[x][y];
+        }
+        if(dp[x][y]!=-1){
+            return dp[x][y];
+        }
+        int v=INT_MAX,p;
+        for(int i=0;i<grid.size();i++){
+            if(i!=y){
+              p = solve(x+1,i,grid,dp);
+              v = min(v,p);
+            }
+        }
+        return dp[x][y] = grid[x][y]+v;
+    }
+
+    int minFallingPathSum(vector<vector<int>>& grid) {
+        vector<vector<int>> dp(grid.size(),vector<int> (grid.size(),-1));
+        int ans = INT_MAX;
+        for(int i=0;i<grid.size();i++){
+            ans = min(ans,solve(0,i,grid,dp));
+        }
+        return ans;
+    }
+};
+
+**************************************************************************************************************************************
