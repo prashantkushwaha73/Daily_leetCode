@@ -414,3 +414,25 @@ public:
 };
 
 **************************************************************************************************************************************
+**** Minimum Number of Operations to Make Array XOR Equal to K ( 29/04/24 ) ****
+
+class Solution {
+public:
+    int minOperations(vector<int>& nums, int k) {
+        int v = nums[0];
+        for(int i=1;i<nums.size();i++){
+              v = ( v^nums[i] );
+        }
+        v = (v^k);
+        int ans = 0;
+        while(v){
+            if(v%2){
+                ans++;
+            }
+            v /= 2;
+        }
+        return ans;
+    }
+};
+
+************************************************************************************************************************************
