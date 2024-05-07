@@ -64,3 +64,56 @@ public:
 };
 
 ****************************************************************************************************************************************
+**** Double a Number Represented as a Linked List ( 07/05/24 ) ****
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* doubleIt(ListNode* head) {
+        vector<int>  v;
+        ListNode* temp = head;
+        while(temp){
+            v.push_back(temp->val);
+            temp = temp->next;
+        }
+        vector<int> n;
+        int carry = 0;
+        for(int i=v.size()-1;i>=0;i--){
+            n.push_back( (v[i]*2 + carry)%10 );
+            carry = (v[i]*2 + carry)/10;
+        }
+        while(carry){
+            n.push_back(carry%10);
+            carry/=10;
+        }
+       // cout<<v<<endl;
+        
+        reverse(n.begin(),n.end());
+      //  for(int i=0;i<n.size();i++){
+       //     cout<<n[i]<<" ";
+       // }
+        
+        if(n.size()){
+            head = new ListNode(n[0]);
+            temp = head;
+        }
+        ListNode* ln;
+        for(int i=1;i<n.size();i++){
+            ln = new ListNode(n[i]);
+                temp->next = ln;
+            temp = ln;
+        }
+        return head;
+    }
+};
+
+****************************************************************************************************************************************
