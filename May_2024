@@ -117,3 +117,38 @@ public:
 };
 
 ****************************************************************************************************************************************
+**** Relative Ranks ( 08/05/24 ) ****
+
+class Solution {
+public:
+    vector<string> findRelativeRanks(vector<int>& score) {
+        priority_queue<int> pq;
+        for(int i=0;i<score.size();i++){
+            pq.push(score[i]);
+        }
+        int i=1;
+        unordered_map<int,string> m;
+        while(!pq.empty()){
+            if(i==1){
+                m[pq.top()] = "Gold Medal";
+            }
+            else if(i==2){
+                m[pq.top()] = "Silver Medal";
+            }
+            else if(i==3){
+                m[pq.top()] = "Bronze Medal";
+            }
+            else{
+                m[pq.top()] = to_string(i);
+            }
+            i++; pq.pop();
+        }
+        vector<string> ans;
+        for(int i=0;i<score.size();i++){
+            ans.push_back(m[score[i]]);
+        }
+        return ans;
+    }
+};
+
+*************************************************************************************************************************************
