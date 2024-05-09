@@ -152,3 +152,27 @@ public:
 };
 
 *************************************************************************************************************************************
+**** Maximize Happiness of Selected Children ( 09/05/24 ) ****
+
+class Solution {
+public:
+    long long maximumHappinessSum(vector<int>& arr, int k) {
+        priority_queue<int> pq;
+        for(int i=0;i<arr.size();i++){
+            pq.push(arr[i]);
+        }
+        int v = 0;
+        long long ans = 0;
+        while(k){
+             if(pq.top()-v > 0){
+                ans += (pq.top()-v);
+             }
+             v++;
+             pq.pop();
+             k--;
+        }
+        return ans;
+    }
+};
+
+*********************************************************************************************************************************************
