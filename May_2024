@@ -176,3 +176,34 @@ public:
 };
 
 *********************************************************************************************************************************************
+**** K-th Smallest Prime Fraction ( 10/05/24 ) ****
+
+class Solution {
+public:
+ 
+    class Compare {
+    public:
+       bool operator()(pair<int,int> a, pair<int,int> b){
+           if(float(a.first)/float(a.second) < float(b.first)/float(b.second)){
+               return true;
+           }
+           return false;
+      }
+};
+
+    vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
+        priority_queue<pair<int,int>,vector<pair<int,int>>,Compare> pq;
+        for(int i=0;i<arr.size();i++){
+            for(int j=i+1;j<arr.size();j++){
+                    pq.push({arr[i],arr[j]});     
+            }
+        } 
+        int size = pq.size();
+        for(int i=0;i<size-k;i++){
+            pq.pop();
+        }
+        return {pq.top().first,pq.top().second};
+    }
+};
+
+***************************************************************************************************************************************
