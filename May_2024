@@ -207,3 +207,34 @@ public:
 };
 
 ***************************************************************************************************************************************
+**** Largest Local Values in a Matrix ( 12/05/24 ) ****
+
+class Solution {
+public:
+
+    int solve(int x,int y,vector<vector<int>>& grid){
+        int v = INT_MIN;
+        for(int i=x-1;i<=x+1;i++){
+            for(int j=y-1;j<=y+1;j++){
+                v = max(v,grid[i][j]);
+            }
+        }
+        return v;
+    }
+
+    vector<vector<int>> largestLocal(vector<vector<int>>& grid) {
+        int n = grid.size()-2;
+        vector<vector<int>> ans;
+        vector<int> p;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                 p.push_back(solve(i+1,j+1,grid));
+            }
+            ans.push_back(p);
+            p.clear();
+        }
+        return ans;
+     }
+};
+
+************************************************************************************************************************************
