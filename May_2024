@@ -238,3 +238,27 @@ public:
 };
 
 ************************************************************************************************************************************
+**** Evaluate Boolean Binary Tree ( 16/05/24 ) ****
+
+class Solution {
+public:
+    bool solve(TreeNode* root){
+        if(root->left==NULL && root->right==NULL){
+            if(root->val==0){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+        if(root->val == 2){
+            return solve(root->left)||solve(root->right);
+        }
+        return solve(root->left)&&solve(root->right);
+    }
+    bool evaluateTree(TreeNode* root) {
+        return solve(root);
+    }
+};
+
+*********************************************************************************************************************************************
