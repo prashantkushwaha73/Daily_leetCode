@@ -285,3 +285,25 @@ public:
 };
 
 **************************************************************************************************************************************************
+**** Sum of All Subset XOR Totals ( 20/05/24 ) ****
+
+class Solution {
+public:
+    void solve(int posi,int v,vector<int>& nums,int& ans){
+        if(posi>=nums.size()){
+            ans += v;
+            return;
+        }
+        solve(posi+1,v,nums,ans);
+        solve(posi+1,v^nums[posi],nums,ans);
+    }
+    int subsetXORSum(vector<int>& nums) {
+        int ans = 0;
+        for(int i=0;i<nums.size();i++){
+            solve(i+1,nums[i],nums,ans);
+        }
+        return ans;
+    }
+};
+
+******************************************************************************************************************************************************
