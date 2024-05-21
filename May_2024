@@ -307,3 +307,24 @@ public:
 };
 
 ******************************************************************************************************************************************************
+**** Subsets ( 21/05/24 ) ****
+
+class Solution {
+public:
+    void solve(int posi,vector<int> v,vector<int>& nums,vector<vector<int>>& ans){
+        if(posi>=nums.size()){
+            ans.push_back(v);
+            return;
+        }
+        solve(posi+1,v,nums,ans);
+        v.push_back(nums[posi]);
+        solve(posi+1,v,nums,ans);
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> ans;
+        solve(0,{},nums,ans);
+        return ans;
+    }
+};
+
+*******************************************************************************************************************************************************
