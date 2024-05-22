@@ -328,3 +328,57 @@ public:
 };
 
 *******************************************************************************************************************************************************
+**** Palindrome Partitioning ( 22/05/24 ) ****
+
+class Solution {
+  private: bool check(vector < string > s) {
+    for (int p = 0; p < s.size(); p++) {
+      string s1 = s[p];
+      reverse(s[p].begin(), s[p].end());
+      string s2 = s[p];
+      if (s1 != s2) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  void solve(string s, vector < vector < string >> & ans, int n, vector < string > & store) {
+    bool flag = 0;
+    for (int p = 0; p < s.size(); p++) {
+      string s1 = (s.substr(0, p + 1));
+      string s2 = (s.substr(p + 1, n));
+      store.push_back(s1);
+      if (s2.size()) {
+        solve(s2, ans, n, store);
+      } else {
+        flag = 1;
+      }
+      if (flag) {
+        ans.push_back(store);
+      }
+      store.pop_back();
+    }
+  }
+  public: vector < vector < string >> partition(string s) {
+
+    int n = s.size();
+    vector < vector < string >> ans;
+    vector < string > store;
+    if (s.size() == 1) {
+      store.push_back(s);
+      ans.push_back(store);
+      return ans;
+    }
+    solve(s, ans, n, store);
+    vector < vector < string >> answer;
+    for (int i = 0; i < ans.size(); i++) {
+      if (check(ans[i])) {
+        answer.push_back(ans[i]);
+      }
+    }
+    return answer;
+  }
+};
+
+*************************************************************************************************************************************
