@@ -382,3 +382,45 @@ class Solution {
 };
 
 *************************************************************************************************************************************
+**** The Number of Beautiful Subsets ( 23/05/24 ) ****
+
+class Solution {
+public:
+    
+    bool check(vector<int>& v,int& k){
+        for(int i=0;i<v.size();i++){
+             for(int j=0;j<v.size();j++){
+                  if(i!=j && abs(v[i]-v[j])==k){
+                    return false;
+                  }
+             }
+        }
+        return true;
+    }
+
+    void solve(int posi,vector<int>& v,int& k,vector<int>& nums,int& ans){
+        if(posi >= nums.size()){
+            if(check(v,k)){
+                ans++;
+            }
+            return;
+        }
+        solve(posi+1,v,k,nums,ans);
+        v.push_back(nums[posi]);
+        solve(posi+1,v,k,nums,ans);
+        v.pop_back();
+    }
+
+    int beautifulSubsets(vector<int>& nums, int k) {
+        int ans = 0,posi;
+        vector<int> v;
+        for(int i=0;i<nums.size();i++){
+            v.push_back(nums[i]);
+            solve(i+1,v,k,nums,ans);
+            v.pop_back();
+        }
+        return ans;
+    }
+};
+
+*******************************************************************************************************************************************
