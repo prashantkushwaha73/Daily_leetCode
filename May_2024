@@ -456,3 +456,39 @@ public:
 };
 
 ***********************************************************************************************************************************************
+**** Get Equal Substrings Within Budget ( 28/05/24 ) ****
+
+class Solution {
+public:
+    int equalSubstring(string s, string t, int maxCost) {
+        vector<int> v;
+        int ans = 0,i=0,j=0,count=abs(int(s[0])-int(t[0])),n=s.size();
+        while(1){
+            if(count<=maxCost){
+                ans = max(ans,i-j+1);
+            }
+            if(i+1<n){
+                if(count+abs(int(s[i+1])-int(t[i+1]))<=maxCost){
+                    i++;
+                    count+=abs(int(s[i])-int(t[i])); 
+                }
+                else if(j<i){
+                     count-=abs(int(s[j])-int(t[j]));
+                     j++;
+                }
+                else{
+                    i++; j++;
+                    count = abs(int(s[i])-int(t[i]));
+                }
+                
+            }
+            else{
+                break;
+            }
+            
+        }
+        return ans;
+    }
+};
+
+*******************************************************************************************************************************************
