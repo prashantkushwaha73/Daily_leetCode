@@ -492,3 +492,73 @@ public:
 };
 
 *******************************************************************************************************************************************
+**** Number of Steps to Reduce a Number in Binary Representation to One ( 29/05/24 ) ****
+
+class Solution {
+public:
+    
+    bool check(string s){
+        int count = 0;
+        if(s[s.size()-1]=='0'){
+            return false;
+        }
+        for(int i=s.size()-1;i>=0;i--){
+            if(s[i]=='1'){
+                count++;
+                if(count>1){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    string oddd(string s){
+        bool flag = false;
+        s[s.size()-1]='0';
+        int posi = s.size()-2;
+        while(posi>=0){
+            if(s[posi]=='0'){
+                s[posi]='1';
+                flag = true;
+                break;
+            }
+            else{
+                s[posi]='0';
+            }
+            posi--;
+        }
+        if(flag){
+            return s;
+        }
+        string p = s;
+        s="1";
+        s+=p;
+        return s;
+    }
+
+    string evenn(string s){
+        s.pop_back();
+        string p = s;
+        s="0";
+        s+=p;
+        return s;
+    }    
+
+    int numSteps(string s) {
+        int ans = 0;
+        while(!check(s)){
+        
+             ans++;
+             if(s[s.size()-1]=='1'){
+                s = oddd(s);
+             }
+             else{
+                s = evenn(s);
+             }
+        }
+        return ans;
+    }
+};
+
+**********************************************************************************************************************************************
