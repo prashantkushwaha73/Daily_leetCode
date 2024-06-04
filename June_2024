@@ -55,3 +55,35 @@ public:
 };
 
 ****************************************************************************************************************************************************
+**** Longest Palindrome ( 04/06/24 ) ****
+
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        int ans = 0;
+        unordered_map<char,int> m;;
+        for(int i=0;i<s.size();i++){
+            m[s[i]]++;
+        }
+        priority_queue<int> pq;
+        for(auto i:m){
+            if(i.second%2){
+                pq.push(i.second);
+            }
+            else{
+                ans+=i.second;
+            }
+        }
+        if(!pq.empty()){
+             ans+=pq.top();
+        pq.pop();
+        }
+        while(!pq.empty()){
+            ans += pq.top()-1;
+            pq.pop();
+        }
+       return ans;
+    }
+};
+
+************************************************************************************************************************************************
