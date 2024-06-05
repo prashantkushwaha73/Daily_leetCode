@@ -87,3 +87,44 @@ public:
 };
 
 ************************************************************************************************************************************************
+**** Find Common Characters ( 05/06/24 ) ****
+
+class Solution {
+public:
+   
+    bool solve(char c,vector<vector<int>>& v){
+          for(int i=1;i<v.size();i++){
+              if(v[i][c-'a']){
+                v[i][c-'a']--;
+              }
+              else{
+                return false;
+              }
+          }
+          return true;
+    }
+    
+    vector<string> commonChars(vector<string>& words) {
+        int n = words.size();
+        vector<vector<int>> v(n,vector<int> (26,0));
+        for(int i=0;i<n;i++){
+            for(int j=0;j<words[i].size();j++){
+                v[i][words[i][j]-'a']++;
+            }
+        }
+        vector<string> ans;
+        string s = words[0],r;
+        char c;
+        for(int i=0;i<s.size();i++){
+            c=s[i];
+             if(solve(c,v)){
+                r="";
+                r.push_back(c);
+                ans.push_back(r);
+             }
+        }
+        return ans;
+    }
+};
+
+*************************************************************************************************************************************************
