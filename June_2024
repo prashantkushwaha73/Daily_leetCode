@@ -128,3 +128,44 @@ public:
 };
 
 *************************************************************************************************************************************************
+**** Replace Words ( 07/06/24 ) ****
+
+class Solution {
+public:
+    string replaceWords(vector<string>& arr, string sentence) {
+        unordered_map<string,bool> m;
+        int n = sentence.size();
+        for(int i=0;i<arr.size();i++){
+            m[arr[i]] = true;
+        } 
+        string ans = "";
+        string s="";
+        for(int i=0;i<n;i++){
+              if(sentence[i]==' '){
+                 ans += s;
+                 ans += " ";
+                 s = "";
+              }
+              else{
+                s += sentence[i];
+                if(m[s]){
+                    while(sentence[i]!=' ' && i<n){
+                        i++;
+                    }
+                    ans += s;
+                    s="";
+                    if(i==n){
+                        return ans;
+                    }
+                    else{
+                        ans += " ";
+                    }
+                }
+              }
+        }
+        ans += s;
+        return ans;
+    }
+};
+
+***********************************************************************************************************************************************
