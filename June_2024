@@ -267,3 +267,49 @@ public:
 };
 
 ***********************************************************************************************************************************************************
+**** 1052. Grumpy Bookstore Owner ( 21/06/24 ) ****
+
+class Solution {
+public:
+    int maxSatisfied(vector<int>& cust, vector<int>& grumpy, int minutes) {
+        int a=0,b=0,posi=0,val=0,i=0,j=0;
+        for(i=0;i<minutes;i++){
+            a += cust[i];
+            if(grumpy[i]==0){
+               b += cust[i];
+            }
+        }
+        i=0,j=minutes-1;
+        val = a-b;
+        while(j+1<cust.size()){
+             a -= cust[i];
+             if(grumpy[i]==0){
+                b -= cust[i];
+             }
+            i++;
+            j++;
+            a += cust[j];
+            if(grumpy[j]==0){
+                b += cust[j];
+            }
+            if(a-b > val){
+                val = a-b;
+                posi = i;
+            }
+        }
+        while(minutes){
+            grumpy[posi]= 0;
+            posi++;
+            minutes--;
+        }
+        int ans = 0;
+        for(i=0;i<cust.size();i++){
+            if(grumpy[i]==0){
+                ans += cust[i];
+            }
+        }
+        return ans;
+    }
+};
+
+****************************************************************************************************************************************************
