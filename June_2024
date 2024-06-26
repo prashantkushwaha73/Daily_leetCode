@@ -371,3 +371,36 @@ public:
 };
 
 *************************************************************************************************************************************************
+**** 1382. Balance a Binary Search Tree ( 26/06/24 ) ****
+
+class Solution {
+public:
+   
+    void trav(TreeNode* root,vector<int>& v){
+        if(root==NULL){
+            return;
+        }
+        trav(root->left,v);
+        v.push_back(root->val);
+        trav(root->right,v);
+    }
+
+    TreeNode* solve(vector<int>& v,int s,int e){
+        if(s>e){
+           return NULL;
+        }
+        int mid = s+(e-s)/2;
+        TreeNode* n = new TreeNode(v[mid]);
+        n->left = solve(v,s,mid-1);
+        n->right = solve(v,mid+1,e);
+        return n;
+    }
+
+    TreeNode* balanceBST(TreeNode* root) {
+        vector<int> v;
+        trav(root,v);
+        return solve(v,0,v.size()-1);
+    }
+};
+
+*********************************************************************************************************************************************************
