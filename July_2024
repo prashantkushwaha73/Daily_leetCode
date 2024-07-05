@@ -40,3 +40,43 @@ public:
 };
 
 **************************************************************************************************************************************************
+**** 2058. Find the Minimum and Maximum Number of Nodes Between Critical Points ( 05/07/24 ) ****
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> nodesBetweenCriticalPoints(ListNode* head) {
+        vector<int> v;
+        vector<int> posi;
+        while(head){
+            v.push_back(head->val);
+            head=head->next;
+        }
+        for(int i=1;i<v.size()-1;i++){
+            if((v[i]<v[i-1]&&v[i]<v[i+1]) || (v[i]>v[i-1]&&v[i]>v[i+1])){
+                posi.push_back(i);
+            }
+        }
+        if(posi.size()<2){
+            return {-1,-1};
+        }
+        int mini=INT_MAX;
+        for(int i=0;i<posi.size()-1;i++){
+            if(posi[i+1]-posi[i]<mini){
+                mini = posi[i+1]-posi[i];
+            }
+        }
+        return {mini,posi[posi.size()-1]-posi[0]};
+    }
+};
+
+************************************************************************************************************************************************
