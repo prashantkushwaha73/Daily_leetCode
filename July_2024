@@ -147,3 +147,59 @@ public:
 };
 
 *********************************************************************************************************************************************
+**** 2196. Create Binary Tree From Descriptions ( 15/07/24 ) **** 
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* createBinaryTree(vector<vector<int>>& arr) {
+        unordered_map<int,bool> visited;
+        unordered_map<int,TreeNode*> m;
+        unordered_map<int,bool> check;
+        TreeNode* naya;
+        TreeNode* child;
+        for(int i=0;i<arr.size();i++){
+            check[arr[i][1]] = true;
+            if(visited[arr[i][0]]==false){
+                  naya = new TreeNode(arr[i][0]);
+                  visited[arr[i][0]] = true;
+                  m[arr[i][0]] = naya;
+            }
+            else{
+                  naya = m[arr[i][0]];
+            }
+            if(visited[arr[i][1]]==false){
+                child = new TreeNode(arr[i][1]);
+                visited[arr[i][1]] = true;
+                m[arr[i][1]] = child;
+            }
+            else{
+                child = m[arr[i][1]];
+            }
+            if(arr[i][2]){
+                naya->left = child;
+            }
+            else{
+                naya->right = child;
+            }
+        }
+        for(int i=0;i<arr.size();i++){
+            if(check[arr[i][0]]==false){
+                return m[arr[i][0]];
+            }
+        }
+      return NULL;
+    }
+};
+
+**************************************************************************************************************************************************
