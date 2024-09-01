@@ -1,0 +1,25 @@
+*******************************************************************************************************************************************
+**** 2022. Convert 1D Array Into 2D Array ( 01/09/24 ) ****
+
+class Solution {
+public:
+    vector<vector<int>> construct2DArray(vector<int>& original, int m, int n) {
+        vector<vector<int>> ans;
+        vector<int> v;
+        int index = 0;
+        if(m*n != original.size()){
+            return ans;
+        }
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                v.push_back(original[index]);
+                index++;
+            }
+            ans.push_back(v);
+            v.clear();
+        }
+        return ans;
+    }
+};
+
+************************************************************************************************************************************************
